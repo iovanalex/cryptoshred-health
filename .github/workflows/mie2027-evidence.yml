@@ -1,0 +1,72 @@
+name: MIE 2027 evidence smoke test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - paper/mie2027-evaluation
+    paths:
+      - "backend/**"
+      - "experiments/mie2027/**"
+      - ".github/workflows/mie2027-evidence.yml"
+  pull_request:
+    paths:
+      - "backend/**"
+      - "experiments/mie2027/**"
+      - ".github/workflows/mie2027-evidence.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mie2027-evidence-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  component-evidence:
+    name: Component evidence (Java 21)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: backend/pom.xml
+
+      - name: Run MIE 2027 component evidence suite
+        run: ../experiments/mie2027/run-component-evidence.sh
+
+      - name: Summarize JUnit evidence
+        if: always()
+        working-directory: .
+        run: python3 experiments/mie2027/summarize_junit.py backend/target/surefire-reports experiments/mie2027/results
+
+      - name: Record run provenance
+        if: always()
+        working-directory: .
+        env:
+          EVIDENCE_COMMIT: ${{ github.sha }}
+          EVIDENCE_RUN_ID: ${{ github.run_id }}
+          EVIDENCE_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: experiments/mie2027/write-provenance.sh experiments/mie2027/results
+
+      - name: Upload raw evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mie2027-component-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: experiments/mie2027/results/
+          if-no-files-found: error
+          retention-days: 90
+
