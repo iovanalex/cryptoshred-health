@@ -599,9 +599,9 @@ public class FhirExportService {
         }
         resource.put("meta", meta);
 
-        resource.put("status", isVisitShredded ? "inactive" : "active");
+        resource.put("status", isVisitShredded ? "unknown" : "active");
         resource.put("subject", Map.of("reference", "Patient/" + patient.getPatientId()));
-        resource.put("encounter", Map.of("reference", "Encounter/" + visit.getId()));
+        resource.put("context", Map.of("reference", "Encounter/" + visit.getId()));
         resource.put("medicationCodeableConcept", Map.of("text", vResp.getPrescriptions()));
 
         return Optional.of(resource);

@@ -279,12 +279,12 @@ class FhirExportIntegrationTest {
         Map<String, Object> allergyRes = resourcesByType.get("AllergyIntolerance");
         assertEquals("Penicillin", ((Map<String, Object>) allergyRes.get("code")).get("text"));
 
-        // 7. Validate MedicationStatement (UK Core compliance: encounter reference instead of context)
+        // 7. Validate MedicationStatement R4 context reference
         assertTrue(resourcesByType.containsKey("MedicationStatement"));
         Map<String, Object> medRes = resourcesByType.get("MedicationStatement");
         assertEquals("Amlodipine 5mg once daily", ((Map<String, Object>) medRes.get("medicationCodeableConcept")).get("text"));
-        assertEquals(Map.of("reference", "Encounter/" + visitUuid), medRes.get("encounter"));
-        assertNull(medRes.get("context"), "MedicationStatement must not contain legacy context field");
+        assertEquals(Map.of("reference", "Encounter/" + visitUuid), medRes.get("context"));
+        assertNull(medRes.get("encounter"), "MedicationStatement R4 must not contain the R5 encounter field");
 
         // 8. Validate DocumentReference
         assertEquals(1, documents.size());
