@@ -13,7 +13,10 @@ mkdir -p "${OUTPUT_DIR}"
   printf 'java_version=%s\n' "$(java -version 2>&1 | head -n 1)"
 } > "${OUTPUT_DIR}/provenance.txt"
 
-find "${OUTPUT_DIR}" -type f ! -name SHA256SUMS -print0 \
-  | sort -z \
-  | xargs -0 sha256sum > "${OUTPUT_DIR}/SHA256SUMS"
+(
+  cd "${OUTPUT_DIR}"
+  find . -type f ! -name SHA256SUMS -print0 \
+    | sort -z \
+    | xargs -0 sha256sum > SHA256SUMS
+)
 
