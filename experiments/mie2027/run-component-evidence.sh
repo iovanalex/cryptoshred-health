@@ -8,5 +8,6 @@ cd "${BACKEND_DIR}"
 
 ./mvnw -B -ntp \
   -Dtest=FhirExportIntegrationTest,RetentionHorizonIntegrationTest,RetentionPolicyServiceTest,ErasureProofPersistenceTest,WormBackupCryptoShredTest \
+  -Dmie.evidence.output=target/mie2027-fhir \
   test
 

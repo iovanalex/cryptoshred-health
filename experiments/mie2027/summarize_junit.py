@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import json
+import shutil
 import sys
 from pathlib import Path
 from xml.etree import ElementTree
@@ -15,12 +16,16 @@ def numeric(value: str | None) -> float:
 
 
 def main() -> int:
-    if len(sys.argv) != 3:
-        print("usage: summarize_junit.py SUREFIRE_DIRECTORY OUTPUT_DIRECTORY", file=sys.stderr)
+    if len(sys.argv) not in (3, 4):
+        print(
+            "usage: summarize_junit.py SUREFIRE_DIRECTORY OUTPUT_DIRECTORY [FHIR_EVIDENCE_DIRECTORY]",
+            file=sys.stderr,
+        )
         return 2
 
     report_dir = Path(sys.argv[1])
     output_dir = Path(sys.argv[2])
+    fhir_evidence_dir = Path(sys.argv[3]) if len(sys.argv) == 4 else None
     output_dir.mkdir(parents=True, exist_ok=True)
 
     rows: list[dict[str, object]] = []
@@ -42,10 +47,19 @@ def main() -> int:
         key: sum(row[key] for row in rows)
         for key in ("tests", "failures", "errors", "skipped", "time_seconds")
     }
+    fhir_artifacts: list[str] = []
+    if fhir_evidence_dir is not None and fhir_evidence_dir.is_dir():
+        fhir_output_dir = output_dir / "fhir-r4"
+        fhir_output_dir.mkdir(exist_ok=True)
+        for source in sorted(fhir_evidence_dir.glob("*.json")):
+            shutil.copy2(source, fhir_output_dir / source.name)
+            fhir_artifacts.append(source.name)
+
     summary = {
         "evidence_level": "component",
         "suite_count": len(rows),
         "totals": totals,
+        "fhir_r4_strict_parser_artifacts": fhir_artifacts,
         "suites": rows,
     }
 

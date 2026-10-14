@@ -50,7 +50,11 @@ jobs:
       - name: Summarize JUnit evidence
         if: always()
         working-directory: .
-        run: python3 experiments/mie2027/summarize_junit.py backend/target/surefire-reports experiments/mie2027/results
+        run: >-
+          python3 experiments/mie2027/summarize_junit.py
+          backend/target/surefire-reports
+          experiments/mie2027/results
+          backend/target/mie2027-fhir
 
       - name: Record run provenance
         if: always()

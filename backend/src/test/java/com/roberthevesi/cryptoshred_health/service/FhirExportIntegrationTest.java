@@ -1,5 +1,7 @@
 package com.roberthevesi.cryptoshred_health.service;
 
+import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.parser.StrictErrorHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.roberthevesi.cryptoshred_health.dto.AttachmentResponse;
 import com.roberthevesi.cryptoshred_health.dto.GpResponse;
@@ -13,7 +15,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.hl7.fhir.r4.model.Bundle;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -24,6 +29,8 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 class FhirExportIntegrationTest {
+
+    private static final FhirContext FHIR_R4_CONTEXT = FhirContext.forR4Cached();
 
     private PatientService patientService;
     private PatientRepository patientRepository;
@@ -162,6 +169,8 @@ class FhirExportIntegrationTest {
 
         // When: Generating FHIR R4 export
         Map<String, Object> bundle = fhirExportService.exportPatientFhirR4(patientId);
+
+        assertStrictR4Bundle("active-patient-bundle.json", bundle);
 
         // Then: Validate Bundle root structure
         assertNotNull(bundle);
@@ -342,6 +351,8 @@ class FhirExportIntegrationTest {
         // When: Generating FHIR R4 export
         Map<String, Object> bundle = fhirExportService.exportPatientFhirR4(patientId);
 
+        assertStrictR4Bundle("crypto-shredded-patient-bundle.json", bundle);
+
         // Then: Bundle and Patient resources must carry REDACTED tags and sanitized values
         assertNotNull(bundle);
         Map<String, Object> bundleMeta = (Map<String, Object>) bundle.get("meta");
@@ -378,5 +389,24 @@ class FhirExportIntegrationTest {
         assertThrows(IllegalArgumentException.class, () -> {
             fhirExportService.exportPatientFhirR4("PAT-NONEXISTENT");
         });
+    }
+
+    private void assertStrictR4Bundle(String evidenceFileName, Map<String, Object> bundle) {
+        String json = assertDoesNotThrow(() -> objectMapper.writeValueAsString(bundle));
+        Bundle parsed = assertDoesNotThrow(() -> FHIR_R4_CONTEXT.newJsonParser()
+                .setParserErrorHandler(new StrictErrorHandler())
+                .parseResource(Bundle.class, json));
+
+        assertEquals("Bundle", parsed.fhirType());
+        assertEquals(((Number) bundle.get("total")).intValue(), parsed.getEntry().size());
+
+        String outputDirectory = System.getProperty("mie.evidence.output");
+        if (outputDirectory != null && !outputDirectory.isBlank()) {
+            assertDoesNotThrow(() -> {
+                Path directory = Path.of(outputDirectory);
+                Files.createDirectories(directory);
+                Files.writeString(directory.resolve(evidenceFileName), json + System.lineSeparator());
+            });
+        }
     }
 }

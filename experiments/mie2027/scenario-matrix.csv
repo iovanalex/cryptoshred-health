@@ -1,7 +1,7 @@
 scenario_id,scenario,component_test,initial_evidence_level,target_evidence,publication_role
 S1,Retention-protected erasure request,RetentionHorizonIntegrationTest;RetentionPolicyServiceTest,component,end-to-end policy decision,primary MIE workflow result
-S2,Patient-level erasure and redacted FHIR state,FhirExportIntegrationTest;ErasureProofPersistenceTest,component,FHIR R4 validation and end-to-end state inspection,primary MIE interoperability result
-S3,Visit-level erasure and retained patient state,FhirExportIntegrationTest;ErasureProofPersistenceTest,component,FHIR R4 validation and end-to-end state inspection,primary MIE granularity result
+S2,Patient-level erasure and redacted FHIR state,FhirExportIntegrationTest;ErasureProofPersistenceTest,component plus strict HAPI R4 parser,UK Core validation and end-to-end state inspection,primary MIE interoperability result
+S3,Visit-level erasure and retained patient state,FhirExportIntegrationTest;ErasureProofPersistenceTest,component plus strict HAPI R4 parser,UK Core validation and end-to-end state inspection,primary MIE granularity result
 S4,Redis eviction failure or stale cache,,none,controlled failure injection,primary MIE failure-semantics result
 S5,WORM snapshot and post-erasure unreadability,WormBackupCryptoShredTest,component,end-to-end snapshot verification,supporting MIE evidence
 S6,Partial failure across Vault SQL Redis and Kafka,,none,controlled failure injection,primary MIE failure-semantics result
