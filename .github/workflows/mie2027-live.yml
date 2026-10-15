@@ -51,14 +51,16 @@ jobs:
         run: |
           cd backend
           ./mvnw -B -ntp -DskipTests package
-          nohup java -jar target/cryptoshred-health-0.0.1-SNAPSHOT.jar > ../experiments/mie2027/live-results/backend.log 2>&1 &
+          nohup java -jar target/cryptoshred-health-0.0.1-SNAPSHOT.jar > /tmp/mie-backend.log 2>&1 &
           for attempt in $(seq 1 90); do
             if curl -fsS http://localhost:8080/actuator/health >/dev/null; then exit 0; fi
             sleep 2
           done
-          tail -100 ../experiments/mie2027/live-results/backend.log
+          tail -100 /tmp/mie-backend.log
           exit 1
       - name: Execute HTTP scenarios
+        env:
+          MIE_POSTGRES_CONTAINER: ${{ job.services.postgres.id }}
         run: python3 experiments/mie2027/live-scenarios.py
       - name: Collect provenance and service logs
         if: always()
@@ -67,6 +69,7 @@ jobs:
           EVIDENCE_RUN_ID: ${{ github.run_id }}
           EVIDENCE_RUN_ATTEMPT: ${{ github.run_attempt }}
         run: |
+          cp /tmp/mie-backend.log experiments/mie2027/live-results/backend.log || true
           for service in redis vault kafka; do
             docker logs mie-$service > experiments/mie2027/live-results/$service.log 2>&1 || true
           done
