@@ -22,8 +22,8 @@ documentary-analysis manuscript remains a separate fallback.
 - Errors per export: 4 (patient after), 7 (visit before), 9 (visit after).
 
 `evidence/repetition-*` retains observations, live FHIR exports, validator
-summaries, OperationOutcome files, provenance and image identifiers. Complete
-logs and receipts remain in the run artifacts with 90-day retention. Committed
+summaries, OperationOutcome files, provenance, receipts, SQL outcomes and image
+identifiers. Complete logs remain in the run artifacts with 90-day retention. Committed
 evidence preserves the manuscript results after artifact expiry.
 
 ## Build
