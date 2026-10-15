@@ -1,0 +1,82 @@
+name: MIE 2027 live scenarios
+on:
+  push:
+    branches: [paper/mie2027-evaluation]
+    paths: ["backend/**", "experiments/mie2027/**", ".github/workflows/mie2027-live.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: toor
+          POSTGRES_DB: healthdb
+        ports: ["5433:5432"]
+        options: >-
+          --health-cmd "pg_isready -U root -d healthdb"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+    env:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+      POSTGRES_DB: healthdb
+      POSTGRES_PORT: "5433"
+      VAULT_DEV_ROOT_TOKEN: mie-ci-ephemeral
+      JWT_SECRET: dGhpcyBpcyBhIHZlcnkgbG9uZyBhbmQgc2VjdXJlIHNlY3JldCBrZXkgZm9yIEpXVCBzaWduaW5n
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: backend/pom.xml
+      - name: Start isolated real services
+        run: |
+          mkdir -p experiments/mie2027/live-results
+          docker run -d --name mie-redis -p 6379:6379 redis:7-alpine
+          docker run -d --name mie-vault -p 8200:8200 --cap-add IPC_LOCK -e VAULT_DEV_ROOT_TOKEN_ID=mie-ci-ephemeral hashicorp/vault:1.13.3 server -dev -dev-listen-address=0.0.0.0:8200
+          docker run -d --name mie-kafka -p 9092:9092 -e KAFKA_NODE_ID=1 -e KAFKA_PROCESS_ROLES=broker,controller -e KAFKA_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 -e KAFKA_CONTROLLER_LISTENER_NAMES=CONTROLLER -e KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT -e KAFKA_CONTROLLER_QUORUM_VOTERS=1@localhost:9093 -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 -e KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1 -e KAFKA_TRANSACTION_STATE_LOG_MIN_ISR=1 apache/kafka:3.7.0
+          for attempt in $(seq 1 60); do
+            if curl -fsS http://localhost:8200/v1/sys/health >/dev/null && docker exec mie-kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Build and start backend
+        run: |
+          cd backend
+          ./mvnw -B -ntp -DskipTests package
+          nohup java -jar target/cryptoshred-health-0.0.1-SNAPSHOT.jar > ../experiments/mie2027/live-results/backend.log 2>&1 &
+          for attempt in $(seq 1 90); do
+            if curl -fsS http://localhost:8080/actuator/health >/dev/null; then exit 0; fi
+            sleep 2
+          done
+          tail -100 ../experiments/mie2027/live-results/backend.log
+          exit 1
+      - name: Execute HTTP scenarios
+        run: python3 experiments/mie2027/live-scenarios.py
+      - name: Collect provenance and service logs
+        if: always()
+        env:
+          EVIDENCE_COMMIT: ${{ github.sha }}
+          EVIDENCE_RUN_ID: ${{ github.run_id }}
+          EVIDENCE_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          for service in redis vault kafka; do
+            docker logs mie-$service > experiments/mie2027/live-results/$service.log 2>&1 || true
+          done
+          experiments/mie2027/write-provenance.sh experiments/mie2027/live-results
+          sed -i 's/evidence_level=component/evidence_level=live-services/' experiments/mie2027/live-results/provenance.txt
+          cd experiments/mie2027/live-results
+          find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mie2027-live-${{ github.run_id }}
+          path: experiments/mie2027/live-results/
+          retention-days: 90
