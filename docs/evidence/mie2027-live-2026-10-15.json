@@ -1,0 +1,50 @@
+{
+  "commit": "af7a9116f17c39b2a17541ae5922176a080b8202",
+  "evidence_level": "live HTTP with real services",
+  "results": [
+    {
+      "scenario": "S1-S2-patient-erasure",
+      "execution": "completed",
+      "observations": {
+        "retention_before": "PROTECTED",
+        "proof_retention": "PROTECTED",
+        "request_accepted": true,
+        "api_redacted": true,
+        "cache_removed": true
+      }
+    },
+    {
+      "scenario": "S3-visit-erasure",
+      "execution": "completed",
+      "observations": {
+        "visit_redacted": true,
+        "patient_demographics_retained": true,
+        "worm_decrypt_before_http": 200,
+        "worm_decrypt_after_http": 400,
+        "vault_key_absent_after": true,
+        "snapshot_bytes_unchanged": true
+      }
+    },
+    {
+      "scenario": "S4-cache-eviction-denied",
+      "execution": "completed",
+      "observations": {
+        "redis_del_denied": true,
+        "plaintext_residual_in_redis": true,
+        "api_redacted": true,
+        "reported_cache_status": "ALL_PATIENT_CACHES_EVICTED"
+      }
+    },
+    {
+      "scenario": "S6-sql-failure-after-key-destruction",
+      "execution": "completed",
+      "observations": {
+        "sql_rollback_retained_active_ciphertext": true,
+        "vault_key_already_destroyed": true,
+        "request_http": 500,
+        "api_shredded_after_rollback": true,
+        "api_retained_original_name": false
+      }
+    }
+  ]
+}
