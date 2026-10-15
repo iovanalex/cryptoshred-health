@@ -71,7 +71,7 @@ def build(source, template, output):
         elif block.startswith("### "):
             document.add_paragraph(block[4:], "Heading 2")
             first_body = True
-        elif block.startswith("Table "):
+        elif re.match(r"Table \d+\.", block):
             p = document.add_paragraph(block, "CaptionLong")
             p.paragraph_format.keep_with_next = True
         elif block.startswith("|"):
@@ -79,7 +79,10 @@ def build(source, template, output):
                     for row in block.splitlines() if not re.fullmatch(r"[| :\-]+", row)]
             table = document.add_table(rows=0, cols=len(rows[0]))
             table.autofit = False
-            widths = [0.7, 6.0, 5.7] if len(rows[0]) == 3 else [6.0, 1.6, 1.6, 1.6, 1.6]
+            if len(rows[0]) == 4:
+                widths = [2.2, 3.0, 5.8, 1.4] if rows[0][0] == "Assertion" else [2.2, 1.2, 1.2, 7.8]
+            else:
+                widths = [0.7, 6.0, 5.7] if len(rows[0]) == 3 else [6.0, 1.6, 1.6, 1.6, 1.6]
             for col, width in zip(table.columns, widths):
                 col.width = Cm(width)
             props = table._tbl.tblPr
@@ -116,13 +119,14 @@ def build(source, template, output):
                     p.paragraph_format.first_line_indent = Cm(0)
                     p.paragraph_format.space_after = Pt(0)
                     p.paragraph_format.space_before = Pt(0)
-                    p.alignment = WD_ALIGN_PARAGRAPH.LEFT if (len(widths) == 3 and column > 0) or (len(widths) == 5 and column == 0) else WD_ALIGN_PARAGRAPH.CENTER
+                    p.alignment = WD_ALIGN_PARAGRAPH.LEFT if (len(widths) == 3 and column > 0) or (len(widths) == 4 and (rows[0][0] == "Assertion" or column in (0, 3))) or (len(widths) == 5 and column == 0) else WD_ALIGN_PARAGRAPH.CENTER
                     r = p.add_run(value)
                     r.font.size = Pt(8)
                     r.bold = row_index == 0
             document.add_paragraph().paragraph_format.space_after = Pt(3)
         elif references:
             p = document.add_paragraph(block, "References")
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT
             no_numbering(p)
             p.paragraph_format.left_indent = Cm(0.5)
             p.paragraph_format.first_line_indent = Cm(-0.5)

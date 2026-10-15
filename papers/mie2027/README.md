@@ -1,8 +1,8 @@
 # MIE 2027 empirical manuscript
 
-Title: **Erasure Workflows and Residual Record State in a Distributed EHR**
+Title: **Verifying EHR Erasure Claims through Fault Injection and FHIR Export Semantics**
 
-Authors: Robert Hevesi and Alexandru Iovanovici.
+Authors: Adina Nitulescu, Robert Hevesi, Mihaela Crisan-Vida and Alexandru Iovanovici.
 
 `manuscript.md` is the editable source. `build_manuscript.py` renders it to Word
 using the official IOS Press book-article template. The Word document has been
@@ -18,7 +18,7 @@ documentary-analysis manuscript remains a separate fallback.
 - All downloaded artifacts passed their complete SHA-256 manifest checks.
 - Six scenario concerns execute in four groups, not six independent fixtures.
 - All Boolean scenario observations match across repetitions.
-- All nine unmodified live FHIR Bundles produce base R4 validation errors.
+- Three export positions recur across repetitions; paired visit exports separate baseline defects from additional occurrences.
 - Errors per export: 4 (patient after), 7 (visit before), 9 (visit after).
 
 `evidence/repetition-*` retains observations, live FHIR exports, validator
@@ -42,5 +42,13 @@ The paper evaluates workflow consistency and residual representations. It does
 not republish throughput, historical recovery, tombstone reconciliation or
 post-quantum proof evaluation. FHIR validation excludes terminology and UK Core
 packages. No UK Core conformance, clinical benefit or legal compliance is claimed.
-Update accepted-manuscript references when final proceedings metadata is
-available. Author review is required before submission.
+ Author review is required before submission.
+
+## Major revision analysis
+
+Run `python papers/mie2027/analyse_retained_evidence.py` from the repository root.
+It verifies paired resource/diagnostic changes and additional Patient FHIR
+demographic observations, retaining input hashes in `evidence/paired-analysis.json`.
+This is post-hoc analysis of existing live evidence, not a new deployment. Kafka
+findings are source observations, not consumed-topic measurements.
+See `response-to-review.md` for changes and remaining scope limits.

@@ -1,0 +1,435 @@
+{
+  "analysis_type": "post-hoc retained-output analysis",
+  "repetitions": [
+    {
+      "repetition": 1,
+      "patient_fhir_demographics": {
+        "given_redacted": true,
+        "family_redacted": true,
+        "birthDate_absent": true,
+        "identifier_retained": true
+      },
+      "resource_counts": [
+        3,
+        5
+      ],
+      "validator_counts": [
+        {
+          "error": 7,
+          "warning": 6,
+          "information": 12
+        },
+        {
+          "error": 9,
+          "warning": 10,
+          "information": 28
+        }
+      ],
+      "added_diagnostics": [
+        {
+          "severity": "warning",
+          "diagnostic": "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+          "count": 2
+        },
+        {
+          "severity": "warning",
+          "diagnostic": "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-AllergyIntolerance' has not been checked because it could not be found",
+          "count": 1
+        },
+        {
+          "severity": "warning",
+          "diagnostic": "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-MedicationStatement' has not been checked because it could not be found",
+          "count": 1
+        },
+        {
+          "severity": "error",
+          "diagnostic": "The fullUrl must be an absolute URL (not 'AllergyIntolerance/allergy-c0c325d4-0d49-4574-9b50-e4f029e13827')",
+          "count": 1
+        },
+        {
+          "severity": "error",
+          "diagnostic": "The fullUrl must be an absolute URL (not 'MedicationStatement/med-c0c325d4-0d49-4574-9b50-e4f029e13827')",
+          "count": 1
+        }
+      ],
+      "condition_status": [
+        "active",
+        "inactive"
+      ],
+      "added_resources": [
+        {
+          "resourceType": "AllergyIntolerance",
+          "id": "allergy-c0c325d4-0d49-4574-9b50-e4f029e13827",
+          "meta": {
+            "profile": [
+              "https://fhir.hl7.org.uk/StructureDefinition/UKCore-AllergyIntolerance"
+            ],
+            "tag": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+                "display": "Crypto-Shredded under GDPR Art. 17",
+                "code": "REDACTED"
+              }
+            ]
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "code": "inactive",
+                "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical"
+              }
+            ]
+          },
+          "verificationStatus": {
+            "coding": [
+              {
+                "code": "confirmed",
+                "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification"
+              }
+            ]
+          },
+          "patient": {
+            "reference": "Patient/MIE-VISIT"
+          },
+          "encounter": {
+            "reference": "Encounter/c0c325d4-0d49-4574-9b50-e4f029e13827"
+          },
+          "code": {
+            "text": "[SHREDDED]"
+          }
+        },
+        {
+          "resourceType": "MedicationStatement",
+          "id": "med-c0c325d4-0d49-4574-9b50-e4f029e13827",
+          "meta": {
+            "profile": [
+              "https://fhir.hl7.org.uk/StructureDefinition/UKCore-MedicationStatement"
+            ],
+            "tag": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+                "display": "Crypto-Shredded under GDPR Art. 17",
+                "code": "REDACTED"
+              }
+            ]
+          },
+          "status": "unknown",
+          "subject": {
+            "reference": "Patient/MIE-VISIT"
+          },
+          "context": {
+            "reference": "Encounter/c0c325d4-0d49-4574-9b50-e4f029e13827"
+          },
+          "medicationCodeableConcept": {
+            "text": "[SHREDDED]"
+          }
+        }
+      ],
+      "input_sha256": {
+        "patient-fhir-after.json": "b447b00d1fd54505d2f95f446add39901d61dac4e00ecd949440aa0f04f27cea",
+        "sql-failure.json": "a27aef9b57307993067a0fdefb9cd76bb8a8ecf12b3a079fb5040374bb511c0b",
+        "visit-fhir-before.json": "1313de789901336ba7c676af13dfb2a29f3718a1e87991706680922e01d3b0a7",
+        "visit-fhir-after.json": "b684f7fc0607d0a97dff140ca4db915df7971d7f97d8a43998e9be8f10e9f235",
+        "scenario-results.json": "fa2f6ddbf8a3a33bb7132a3fd0b00494a3aa5cc96cddf8058eb1005d6700c1bc",
+        "cache-failure-proof.json": "363b6ad76b75f2cb755f7befe3fe1f11705911e44ea5ee30b523184a46a39acb",
+        "patient-proof.json": "8aad854d0c0dcf4df3c500f43c0ec646716d7ebd5ac2d5d34d771285ca8c059c",
+        "fhir-validation/patient-fhir-after.json.outcome.json": "4a1a92331412f5340b0bd1a9e1b165849885ac6645a18d4a02de5b42563f2b7e",
+        "fhir-validation/visit-fhir-before.json.outcome.json": "ac0c48a6144a42d9ee8f8536a6ff28960fe4a635772112cfca749f099842ce9c",
+        "fhir-validation/summary.json": "3cb658a83038ce3cf8819df652bb7346f170c0fc585815805a16127c2e763af8",
+        "fhir-validation/visit-fhir-after.json.outcome.json": "5c409514d2699d1648e2a1ba58bfff984c27f0a0b7225196d9827138f691e344"
+      }
+    },
+    {
+      "repetition": 2,
+      "patient_fhir_demographics": {
+        "given_redacted": true,
+        "family_redacted": true,
+        "birthDate_absent": true,
+        "identifier_retained": true
+      },
+      "resource_counts": [
+        3,
+        5
+      ],
+      "validator_counts": [
+        {
+          "error": 7,
+          "warning": 6,
+          "information": 12
+        },
+        {
+          "error": 9,
+          "warning": 10,
+          "information": 28
+        }
+      ],
+      "added_diagnostics": [
+        {
+          "severity": "warning",
+          "diagnostic": "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+          "count": 2
+        },
+        {
+          "severity": "warning",
+          "diagnostic": "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-AllergyIntolerance' has not been checked because it could not be found",
+          "count": 1
+        },
+        {
+          "severity": "warning",
+          "diagnostic": "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-MedicationStatement' has not been checked because it could not be found",
+          "count": 1
+        },
+        {
+          "severity": "error",
+          "diagnostic": "The fullUrl must be an absolute URL (not 'AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff')",
+          "count": 1
+        },
+        {
+          "severity": "error",
+          "diagnostic": "The fullUrl must be an absolute URL (not 'MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff')",
+          "count": 1
+        }
+      ],
+      "condition_status": [
+        "active",
+        "inactive"
+      ],
+      "added_resources": [
+        {
+          "resourceType": "AllergyIntolerance",
+          "id": "allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff",
+          "meta": {
+            "profile": [
+              "https://fhir.hl7.org.uk/StructureDefinition/UKCore-AllergyIntolerance"
+            ],
+            "tag": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+                "code": "REDACTED",
+                "display": "Crypto-Shredded under GDPR Art. 17"
+              }
+            ]
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+                "code": "inactive"
+              }
+            ]
+          },
+          "verificationStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+                "code": "confirmed"
+              }
+            ]
+          },
+          "patient": {
+            "reference": "Patient/MIE-VISIT"
+          },
+          "encounter": {
+            "reference": "Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff"
+          },
+          "code": {
+            "text": "[SHREDDED]"
+          }
+        },
+        {
+          "resourceType": "MedicationStatement",
+          "id": "med-4a4f2571-3c61-4436-b055-cb58ca1107ff",
+          "meta": {
+            "profile": [
+              "https://fhir.hl7.org.uk/StructureDefinition/UKCore-MedicationStatement"
+            ],
+            "tag": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+                "code": "REDACTED",
+                "display": "Crypto-Shredded under GDPR Art. 17"
+              }
+            ]
+          },
+          "status": "unknown",
+          "subject": {
+            "reference": "Patient/MIE-VISIT"
+          },
+          "context": {
+            "reference": "Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff"
+          },
+          "medicationCodeableConcept": {
+            "text": "[SHREDDED]"
+          }
+        }
+      ],
+      "input_sha256": {
+        "patient-fhir-after.json": "1f1b6230d7c4fe876897d57a377cfdfa796a3c8067612094dddf8dc064566527",
+        "sql-failure.json": "b9bf0e6019ba49952d8164bca97af92ec1f843b3c71e840fd932e32d569042a4",
+        "visit-fhir-before.json": "25b257d880d37786e72b88d871fc48d18cf24261df3420b89e629acb7eb8e471",
+        "visit-fhir-after.json": "69751cd569ef353fbc6b5269b0d9dde301adc51a24187cab4cffdfa3902874c1",
+        "scenario-results.json": "fa2f6ddbf8a3a33bb7132a3fd0b00494a3aa5cc96cddf8058eb1005d6700c1bc",
+        "cache-failure-proof.json": "371fa2d015db7b859bc6324e9a1d2cd5ada49af3f956b634dfc10ac261653a84",
+        "patient-proof.json": "6ebbe6329ae7a9687269c4e6645a1ba47e1fc56b49ccba7a16bd417272cd585e",
+        "fhir-validation/patient-fhir-after.json.outcome.json": "926b099ff0e2a84f93e117ed5d823c7bfa1d63b3f9271838f7b73bb4e092a8c2",
+        "fhir-validation/visit-fhir-before.json.outcome.json": "5969bea776384ab55bfe7d0f0e850e8a826ef000bf239a4139cd2d967c234ae6",
+        "fhir-validation/summary.json": "2dc14ee2c26b1679157eaddbc226cf2839ca6f1196f0aac075da45b955dd9ab1",
+        "fhir-validation/visit-fhir-after.json.outcome.json": "ae4ed2529ee10700a8d0d93a4427ad17d183790ce665b90c2bff2f2f48faebc7"
+      }
+    },
+    {
+      "repetition": 3,
+      "patient_fhir_demographics": {
+        "given_redacted": true,
+        "family_redacted": true,
+        "birthDate_absent": true,
+        "identifier_retained": true
+      },
+      "resource_counts": [
+        3,
+        5
+      ],
+      "validator_counts": [
+        {
+          "error": 7,
+          "warning": 6,
+          "information": 12
+        },
+        {
+          "error": 9,
+          "warning": 10,
+          "information": 28
+        }
+      ],
+      "added_diagnostics": [
+        {
+          "severity": "warning",
+          "diagnostic": "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+          "count": 2
+        },
+        {
+          "severity": "warning",
+          "diagnostic": "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-AllergyIntolerance' has not been checked because it could not be found",
+          "count": 1
+        },
+        {
+          "severity": "warning",
+          "diagnostic": "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-MedicationStatement' has not been checked because it could not be found",
+          "count": 1
+        },
+        {
+          "severity": "error",
+          "diagnostic": "The fullUrl must be an absolute URL (not 'AllergyIntolerance/allergy-06014ab8-dc1b-4a09-bb2c-7f1305043cab')",
+          "count": 1
+        },
+        {
+          "severity": "error",
+          "diagnostic": "The fullUrl must be an absolute URL (not 'MedicationStatement/med-06014ab8-dc1b-4a09-bb2c-7f1305043cab')",
+          "count": 1
+        }
+      ],
+      "condition_status": [
+        "active",
+        "inactive"
+      ],
+      "added_resources": [
+        {
+          "resourceType": "AllergyIntolerance",
+          "id": "allergy-06014ab8-dc1b-4a09-bb2c-7f1305043cab",
+          "meta": {
+            "profile": [
+              "https://fhir.hl7.org.uk/StructureDefinition/UKCore-AllergyIntolerance"
+            ],
+            "tag": [
+              {
+                "code": "REDACTED",
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+                "display": "Crypto-Shredded under GDPR Art. 17"
+              }
+            ]
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+                "code": "inactive"
+              }
+            ]
+          },
+          "verificationStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+                "code": "confirmed"
+              }
+            ]
+          },
+          "patient": {
+            "reference": "Patient/MIE-VISIT"
+          },
+          "encounter": {
+            "reference": "Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab"
+          },
+          "code": {
+            "text": "[SHREDDED]"
+          }
+        },
+        {
+          "resourceType": "MedicationStatement",
+          "id": "med-06014ab8-dc1b-4a09-bb2c-7f1305043cab",
+          "meta": {
+            "profile": [
+              "https://fhir.hl7.org.uk/StructureDefinition/UKCore-MedicationStatement"
+            ],
+            "tag": [
+              {
+                "code": "REDACTED",
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+                "display": "Crypto-Shredded under GDPR Art. 17"
+              }
+            ]
+          },
+          "status": "unknown",
+          "subject": {
+            "reference": "Patient/MIE-VISIT"
+          },
+          "context": {
+            "reference": "Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab"
+          },
+          "medicationCodeableConcept": {
+            "text": "[SHREDDED]"
+          }
+        }
+      ],
+      "input_sha256": {
+        "patient-fhir-after.json": "ea7d08ea6864becfd2a1e0c9338ddd4054d94b00ef278388e3d77303d25ed4c1",
+        "sql-failure.json": "0c995e18ba18026304472771143d546d2465be774fbe69489d3773d5cd3f6ce5",
+        "visit-fhir-before.json": "86261a91c3f537882e34d9f0a8a50ed17dea1769a7902789f3156eb615e8976a",
+        "visit-fhir-after.json": "d98d15da2dff206e9a5b92b31e4814e2f3117ceab231bb4149d591104761827f",
+        "scenario-results.json": "fa2f6ddbf8a3a33bb7132a3fd0b00494a3aa5cc96cddf8058eb1005d6700c1bc",
+        "cache-failure-proof.json": "4a58d16dd8dd2f2877b090835f0b409b9a715bb3d4cf232eb5c72733b71afcce",
+        "patient-proof.json": "45016ab134dcd30e20e3e8225dde187dbaa18b3c9f588042aa66362c74cf6823",
+        "fhir-validation/patient-fhir-after.json.outcome.json": "845a19d3e06ee5d27dd9e69bd282b2cae543a31379770918951898d5050e57bb",
+        "fhir-validation/visit-fhir-before.json.outcome.json": "675c5cd031210fd23af207440d0d7caeec7147521addd9daaa467fa06aa74ba1",
+        "fhir-validation/summary.json": "04840ea8963ba2f79604febe26ebab3bfe650e0211ac76da8245a6b5b4942ef8",
+        "fhir-validation/visit-fhir-after.json.outcome.json": "ca4141ae063701506f200a06df52db473234a205af2d93c43757235fb4621d69"
+      }
+    }
+  ],
+  "source_review": {
+    "scope": "DTO, creation and erasure event builders and publisher; no Kafka topic consumption",
+    "observations": [
+      "Creation events include encryptedDataBlob, wrappedDek and iv.",
+      "Creation and erasure events retain patientId, eventType, vaultKeyName and timestamp in JSON.",
+      "Erasure events omit the encrypted payload; publication is asynchronous.",
+      "A retained event identifier remains linkable metadata; key destruction cannot remove it."
+    ],
+    "source_sha256": {
+      "backend/src/main/java/com/roberthevesi/cryptoshred_health/dto/PatientVisitEventDto.java": "4d6e9a37fc6b0ce900372beb36f4be415a236aadd8be5d6e63a41d6c23aeb87a",
+      "backend/src/main/java/com/roberthevesi/cryptoshred_health/service/EventLogPublisher.java": "38696f8453bb370f7514e2af446d79fed2e89416dc83287759ca4cd6d370d61f",
+      "backend/src/main/java/com/roberthevesi/cryptoshred_health/service/PatientService.java": "0323176ac795dc722311a7a3626e33cd811f3ae54497714df07e54bdd536e9c2",
+      "backend/src/main/java/com/roberthevesi/cryptoshred_health/service/PatientVisitService.java": "efee182989301ec847d976b6b793c00ea4d600c823fae3fc9ad6bf243f246f98",
+      "backend/src/main/java/com/roberthevesi/cryptoshred_health/service/ErasureService.java": "92bbd7d4b4d9a006f58d80661f469c6e8f4ffee433d42ca84334c1b45ceb725a"
+    }
+  }
+}

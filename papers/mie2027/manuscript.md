@@ -1,4 +1,4 @@
-# Erasure Workflows and Residual Record State in a Distributed EHR
+# Verifying EHR Erasure Claims through Fault Injection and FHIR Export Semantics
 
 Adina NITULESCU, Robert HEVESI, Mihaela CRISAN-VIDA and Alexandru IOVANOVICI
 
@@ -8,121 +8,116 @@ Corresponding author: Alexandru Iovanovici, alexandru.iovanovici@upt.ro
 
 ## Abstract
 
-Removing access to a medical record does not explain what remains in storage or what an exported diagnosis means. We evaluated these differences after cryptographic erasure in CryptoShred Health using synthetic records, live services, two injected faults and three fresh deployments. We compared policy metadata, storage, application responses and deletion receipts, and assessed exports against HL7 FHIR R4. Normal erasure redacted the tested name and disabled the tested snapshot decryption path. However, requests classified PROTECTED proceeded without an explicit override; denied cache eviction left plaintext despite a receipt claiming eviction; and failed database persistence left divergent states. All nine exported Bundles produced validation errors; an erasure-induced clinical-status change lacked clinical justification. The contribution is a reproducible protocol separating policy decisions, storage effects, disclosure and clinical representation. Results concern one prototype and do not establish comprehensive erasure, clinical effectiveness or legal compliance.
+An erased diagnosis should not become an inactive condition, nor should erasure introduce an allergy or medication record. We observed both transformations in FHIR exports from an electronic health record (EHR) prototype. We formalised a claim-to-observation evaluation protocol and applied it to synthetic patient and visit erasure, two injected failures and paired HL7 FHIR R4 exports. Five assertions were linked to separate observations and explicit criteria: policy decisions, decryption capability, persisted status, disclosure suppression and clinical representation. Denied cache deletion left readable data despite a receipt claiming eviction. A rejected database update left metadata inconsistent with key destruction already performed by the workflow. Visit erasure introduced two placeholder resources, including a confirmed AllergyIntolerance, and changed Condition status from active to inactive. Paired analysis distinguished these semantic changes from pre-existing structural export defects. Repeating deterministic scenarios in three fresh deployments reproduced the observations. The protocol makes erasure assurances inspectable across storage, receipts and exchanged clinical representations.
 
-Keywords: electronic health records; cryptographic erasure; data governance; fault injection; HL7 FHIR; semantic interoperability
+Keywords: electronic health records; cryptographic erasure; fault injection; HL7 FHIR; semantic interoperability
 
 ## Introduction
 
-For clinicians, a missing diagnosis can have several meanings: the condition was never recorded, the information has been restricted, or the record is temporarily unavailable. Erasure introduces another possibility: previously recorded information can no longer be recovered. These states should not be confused with a clinical judgement that the condition has resolved. Understanding what remains visible after erasure matters when interpreting a patient's record or exchanging information with another service.
+For a clinician, an absent diagnosis may mean that it was never recorded, access is restricted or information is unavailable. None means that the condition has resolved. Similarly, an allergy resource introduced during erasure can imply previously unrecorded clinical information. Systems must distinguish changes in information availability from changes in a patient's condition.
 
-An electronic health record (EHR) is more than a single database entry. This prototype also holds temporary decrypted copies in a cache to accelerate access, encrypted visit snapshots and exports for exchange. Cryptographic erasure destroys the key needed to read encrypted information [2,3]. The encrypted bytes may remain, while a readable cached copy requires separate removal. A deletion receipt records what the system claims to have completed. Consequently, neither a hidden name on screen nor a successful receipt alone establishes the state of every copy.
+An electronic health record (EHR) can hold encrypted records, readable temporary copies in a cache and exports shared with other services. Cryptographic erasure destroys a key needed to decrypt data [1,2]; encrypted bytes may remain, while readable cached copies need separate removal. A deletion receipt reports what the system claims to have completed. Clinicians and information-governance staff therefore need to know what was removed, what remains and how absence is represented.
 
-For example, if an erased diagnosis appears as “inactive” in an export, a recipient could interpret it as a change in the patient's condition. HL7 Fast Healthcare Interoperability Resources (FHIR) defines structured resources for exchanging such information [8,9]. An export must therefore convey both an acceptable structure and a meaning justified by the record's state. This example motivates our evaluation; we did not study clinician behaviour or patient outcomes.
+Secure-deletion research distinguishes mechanisms across storage layers [2]. Politou et al. describe the difficulty of erasure and consent withdrawal in disseminated systems [3]; GDPR Article 17 also specifies exceptions [4]. Logging guidance warns against unnecessary retention of sensitive data [5]. HL7 FHIR defines clinical resources and security labels for exchange [6,7]. These perspectives motivate checking storage effects and the meaning of resulting exports together.
 
-GDPR Article 17 defines grounds and exceptions for erasure [1]. We evaluate technical consistency after a request, rather than deciding when a medical record should legally be erased. CryptoShred Health is an envelope-encrypted EHR prototype [4] whose performance is reported separately [5]. We compare policy metadata, storage state, application responses, receipts and exports during normal operation and two selected failures. The contribution is a reproducible method linking each erasure claim to a separate observation, not a new cryptographic primitive or an estimate of deployment reliability.
+We present a claim-to-observation protocol for an EHR prototype, relating each assertion to an observation and criterion. We examine current erasure requests and interruptions, rather than historical backup restoration or performance. The central question is whether storage, receipts and clinical representations agree after erasure.
 
 ## Methods
 
-### Prototype and execution environment
+### System and scenario selection
 
-The Java 21/Spring Boot 3.3.4 prototype stores encrypted records and metadata in PostgreSQL, decrypted responses in Redis and events through Kafka. Vault Transit manages key-encryption keys (KEKs) wrapping data-encryption keys (DEKs). FHIR exports group resources into Bundles. Two MedicationStatement R4 fields had previously been corrected using a strict parser; the erasure workflow was unchanged.
+CryptoShred Health uses Java 21/Spring Boot 3.3.4, PostgreSQL 15, Redis 7, Kafka 3.7.0 and Vault 1.13.3. Vault key-encryption keys (KEKs) wrap data-encryption keys (DEKs); Redis caches decrypted responses. We exercised the application JAR as its seeded DOCTOR role. Three isolated hosted jobs ran the same deterministic sequences with fresh services, four synthetic patients and one visit each. Evaluated commit 436d4d662315e82de62df07776c449f02d26bae3 and retained evidence are available [8].
 
-Commit 436d4d662315e82de62df07776c449f02d26bae3 ran in three isolated GitHub Actions jobs with fresh databases and services. Each built the application JAR and ran scenarios as the seeded DOCTOR role against PostgreSQL 15, Redis 7, Kafka 3.7.0 and one development-mode Vault 1.13.3 instance. Only synthetic records were created. Versioned evidence contains observations, exports and diagnostics; complete logs and receipts were captured as run artifacts [6].
+Source review traced retention, key destruction, SQL updates, cache eviction, events and receipts. S2/S3 exercised normal patient/visit paths; S1 probed retention and S5 snapshot decryptability. S4 denied Redis DEL while allowing GET, modelling permission drift. S6 rejected a patient update through a SQL trigger, modelling persistence rejection such as a constraint failure. These source-informed faults target non-transactional boundaries, not network partitions or timeouts.
 
-### Scenarios and observations
+### Claim-to-observation protocol
 
-Source-guided selection covered six concerns in four sequences (Table 1), with four patients and one visit per deployment. Direct database, Vault and Redis observations were compared with API responses and receipt claims. Checks covered the named cache entry, tested name, shredded flags and KEK reference, not every field or copy. Outcomes were Boolean observations and HTTP results; no reliability estimates were calculated.
+Table 1 retrospectively formalises the evaluation: D denotes a service-contract effect [8], F a FHIR semantic requirement and P a proposed operational criterion. S1 is conditional: the design specifies classification, not a mandatory override gate. Observations are assessed against these criteria; unresolved requirements remain explicit.
 
-Table 1. Scenario protocol and independent observations.
+Table 1. Assertions, required observations, expected outcomes and scenarios.
 
-| ID | Operation or injected condition | Principal observation |
-|---|---|---|
-| S1 | Erase a recently created patient without an override reason | Retention classification and acceptance |
-| S2 | Complete patient-level erasure | Tested name redacted and Redis key absent |
-| S3 | Erase one clinical visit | Visit flagged shredded and patient name retained |
-| S4 | Deny Redis DEL while allowing GET | Residual plaintext, API response and receipt claim |
-| S5 | Keep a snapshot made before visit erasure | Vault unwrap before/after and snapshot fingerprint |
-| S6 | Reject SQL update after external key destruction | Request error, SQL row, Vault key and subsequent GET |
+| Assertion | Observation | Expected outcome and basis | Scenario |
+|---|---|---|---|
+| Policy decision | Classification, request reason and acceptance | Explicit execution policy; if PROTECTED requires override, reject an unexplained request (P) | S1 |
+| Decryption unavailable | Unwrap same snapshot DEK before/after; inspect KEK | Initial unwrap succeeds, subsequent unwrap fails and KEK is absent (D) | S5 |
+| Persisted status truthful | SQL row, key state and API after failure | Completed or durable pending state agrees with irreversible effects (P); normal scope is respected (D) | S2, S3, S6 |
+| Disclosure and receipt agree | Read named cache directly and compare API/receipt | Claimed eviction requires absent cache entry (D); failure must not be reported as success (P) | S2, S4 |
+| Clinical meaning preserved | Paired resource types, fields and clinical codes | No new clinical assertion or status change solely from erasure (F) | S2, S3 |
 
-S4 denied Redis DEL after cache warming. S6 used a PostgreSQL trigger to reject one patient update; SQL inspection preceded the subsequent GET. Both fault controls were removed in finally blocks.
+For S2 we checked API firstName and shredded status plus Redis key absence. Subsequent analysis of retained patient FHIR output additionally checked family name, birthDate and identifier retention. S3 checked visit status and preservation of the patient's name. S5 compared the snapshot's wrapped DEK, Vault response and SHA-256 before/after erasure. In S6, the workflow itself destroyed the KEK before SQL persistence failed; SQL inspection preceded a later GET. Fault controls were removed after each sequence.
 
-S5 checked Vault unwrap using the snapshot's wrapped DEK and KEK reference, KEK absence and unchanged snapshot SHA-256. This tests that key path, not certified immutable media or absence of other key copies.
+Receipts contain scope, identifiers, requester, retention reason, timestamp, per-layer claims, an audit hash and Merkle inclusion data. RSA and ML-DSA signatures cover an identifier, timestamp, audit hash and Merkle root, not the complete JSON receipt. The service constructs the receipt after cache-eviction invocation and asynchronous Kafka submission, before the surrounding SQL transaction commits. Cache errors are caught and logged. We compare claims with effects; signature strength is outside this evaluation.
 
-### FHIR assessment and evidence interpretation
+### Export assessment and residual-store scope
 
-Each deployment produced three live Bundles: after patient erasure, before visit erasure and after visit erasure. We assessed unmodified JSON with HAPI FHIR 8.8.2 and base R4 definitions [7]. Terminology checks were disabled, UK Core packages were not loaded, and unknown profiles were not configured as errors. All messages and OperationOutcome resources were retained. This used an external validator implementation, not independent investigators. Successful scenario execution and valid FHIR were separate outcomes.
+Each deployment yielded three export positions: patient after erasure and a paired visit before/after. HAPI FHIR 8.8.2 assessed unmodified JSON against base R4 definitions [9]. Terminology validation was disabled and UK Core packages were unavailable. We separated existing diagnostic classes from added occurrences on newly introduced resources, then inspected clinical meaning against Condition definitions [6]. Analysis scripts and input hashes are retained [8].
 
-Clinical-status changes were inspected against R4 definitions [8]: accepting a code does not establish its clinical justification. Mocked component tests supported regression checks and were not counted as live deployments.
+A source audit covered Kafka event builders, DTO fields and the publisher. It distinguishes encrypted payloads from readable event metadata; topic consumption was not performed. PostgreSQL write-ahead logs and historical backups were excluded because the protocol concerns current workflow consistency rather than storage-forensic sanitisation or recovery. The snapshot check covers one decryption path only.
 
 ## Results
 
-### Workflow outcomes
+### Erasure-induced clinical representations
 
-All four sequences completed with matching observations across three deployments. In S1, the patient response reported PROTECTED, yet the request succeeded without an explicit override. The receipt retained PROTECTED and supplied STANDARD_REQUEST as its reason. This tested endpoint records retention classification without requiring a separately supplied override. PROTECTED is a prototype label; neither it nor this experiment determines the legally appropriate retention decision.
+Before visit erasure, the Bundle contained Patient, Encounter and Condition. Afterwards it also contained AllergyIntolerance and MedicationStatement generated from non-empty [SHREDDED] placeholders. The new allergy carried verificationStatus=confirmed and clinicalStatus=inactive; the medication status was unknown. The existing Condition changed from active to inactive. No clinical update occurred between exports. These changes create unsupported clinical representations, rather than merely signalling unavailable information.
 
-In S2, the patient's firstName became [SHREDDED], its response flag was true and the Redis key was absent. In S3, the visit endpoint reported shredded=true while the patient's original firstName remained available. In S5, Vault unwrap returned HTTP 200 before erasure; afterwards KEK lookup returned 404 and the same unwrap request returned 400. The snapshot fingerprint remained unchanged. These are observations of the tested fields and key path, not exhaustive absence-of-plaintext checks.
+The REDACTED marker appeared in meta.tag rather than meta.security. S2's retained Patient export contained redacted given and family names, omitted birthDate and retained the synthetic patient identifier. Identifier retention was therefore explicit, not evidence of complete anonymisation. All these observations recurred in the three executions.
 
-S4 exposed disagreement between storage and evidence. Redis still contained the synthetic name after DEL was denied. The patient API nevertheless returned a redacted representation, consistent with its database-state guard. The emitted receipt reported ALL_PATIENT_CACHES_EVICTED. Consequently, suppression through the application read path did not demonstrate removal of plaintext from the cache, and the receipt overstated the directly observed effect.
+### Paired structural diagnostics
 
-In S6, the erasure request returned HTTP 500. The subsequent SQL inspection found shredded=false and ciphertext present, while Vault returned 404 for the KEK. A later GET reported shredded=true without the original name. Thus, API representation differed from the SQL state observed immediately after failure. We did not re-query SQL after that GET or test whether a later operation repaired the inconsistency. The failed metadata update did not reverse external key destruction.
+Table 2 reports the paired visit comparison, not nine independent validation samples. Seven errors were already present before erasure: timezone/instant defects, an invalid identifier OID, relative fullUrl values and use of total in a collection Bundle. After erasure, two additional relative-fullUrl errors occurred on the new resources. Four additional warnings comprised two missing narratives and two unresolved UK Core profiles. Thus erasure increased occurrences of existing defect classes; it did not introduce new structural error classes. Semantic changes were established by comparison, independently of these counts.
 
-### Interoperability outputs
+Table 2. Paired visit exports per execution; the same counts recurred three times.
 
-The exports contained one resource after patient erasure, three before visit erasure and five afterwards. Redacted placeholders introduced previously absent AllergyIntolerance and MedicationStatement resources; resource count cannot indicate retained clinical information.
+| Measure | Before | After | Erasure-associated addition |
+|---|---|---|---|
+| Resources | 3 | 5 | AllergyIntolerance and MedicationStatement |
+| Errors | 7 | 9 | 2 relative-fullUrl occurrences |
+| Warnings | 6 | 10 | 2 narratives and 2 unavailable profiles |
 
-All nine live Bundles produced validation errors. For each export position, resource counts and diagnostic counts were identical across the three deployments (Table 2). Errors included timestamps without timezone information, an invalid OID identifier system, relative entry fullUrl values and violation of bdl-1 through use of total in a collection Bundle [9]. Warnings included absent narratives and unavailable UK Core profile definitions. Error counts describe these fixtures and validator settings, not a general interoperability score.
+### Storage, policy and receipt consistency
 
-Table 2. Base R4 validator diagnostics per Bundle in each of three deployments.
+S2 redacted API firstName, set shredded=true and removed the named cache entry. S3 reported the visit shredded while preserving patient demographics. In S5, the retained encrypted snapshot was byte-identical; Vault unwrap changed from HTTP 200 to 400 and KEK lookup returned 404.
 
-| Export position | Resources | Errors | Warnings | Info |
-|---|---|---|---|---|
-| After patient erasure | 1 | 4 | 2 | 0 |
-| Before visit erasure | 3 | 7 | 6 | 3 |
-| After visit erasure | 5 | 9 | 10 | 7 |
+Under S4, Redis retained the synthetic name after DEL was denied, while the patient API suppressed it. The receipt nevertheless asserted ALL_PATIENT_CACHES_EVICTED. This failed the disclosure/receipt criterion: API suppression and removal of readable cached data diverged.
 
-Inspection also confirmed that the Condition clinicalStatus changed from active to inactive after erasure. In R4, inactive expresses a judgement about symptoms or evidence of the condition [8]; loss of decryptability does not provide that evidence. The REDACTED marker was placed in meta.tag. A general tag does not by itself establish a security-label enforcement contract, which FHIR represents separately [10]. We did not test downstream consumers or measure clinical consequences.
+In S6 the request returned HTTP 500, but external key destruction survived SQL rollback. The inspected row retained shredded=false and ciphertext, whereas the later GET reported shredded=true without the original name. This failed the persisted-status criterion. The failure arose from an irreversible action preceding transaction completion.
+
+S1 accepted a PROTECTED patient without an override and supplied STANDARD_REQUEST in its receipt. Source review confirmed this is permitted behaviour. The result exposes an unspecified execution gate, not a demonstrated breach of a documented blocking rule or a legal conclusion. Kafka source review found creation events with encrypted payloads and readable identifiers; erasure events retained patientId, eventType, key reference and timestamp. Those metadata remain outside key-based payload erasure.
 
 ## Discussion
 
-The protocol distinguishes five assertions: permission to proceed, loss of a decryption path, persisted workflow status, suppression of disclosure and faithful clinical representation. They require different observations. S4 demonstrates that suppression and cache removal can disagree; S6 demonstrates that a redacted response does not establish a committed deletion flag. These comparisons turn individual defects into explicit evaluation requirements for an erasure-capable EHR.
+The strongest clinical implication is that removing information must not manufacture an allergy, medication record or disease transition. Exporters should suppress placeholder-triggered resources. Where disclosure policy permits indicating redaction, REDACTED from the v3 ObservationValue system belongs in meta.security, with agreed consumer handling [7,10]. A masked data-absent-reason can describe withheld elements where permitted [11]. Condition con-3 recommends clinicalStatus for problem-list items; con-5 prohibits it when verificationStatus is entered-in-error [6]. Neither constraint justifies inventing inactivity or falsely declaring a diagnosis erroneous. Resource omission or a constrained redacted representation requires an explicit exchange policy.
 
-The database guard suppressed disclosure through the patient endpoint while plaintext remained retrievable from Redis. Receipts should distinguish requested from confirmed eviction and expose unresolved effects to authorised operators. Receipt integrity cannot establish the truth of an unobserved storage claim or extend its scope to exported copies.
+Operationally, S4 requires reporting confirmed eviction separately from attempted eviction. S6 requires durable intent and recoverable completion: commit a pending action, execute key destruction idempotently and persist completion, with retry or escalation for interrupted steps. An outbox/saga-style workflow is a candidate design, not a remedy tested here. Moving a success message alone cannot solve the ordering problem. Receipt authentication likewise cannot prove storage effects that were not observed; in this implementation per-layer JSON claims are also outside the signed canonical fields.
 
-For an authorised operator, a partial-completion state should explain which action failed and whether escalation is needed. The metadata failure illustrates this need when key destruction succeeds but persistence fails. This concerns interruption of a current request, not restoration of historical keys. Neither a distributed transaction protocol nor the prototype's backup-recovery and tombstone mechanisms are evaluated here.
+The protocol can be reused by enumerating stores, stating each effect, assigning a separate observer and criterion, and preserving paired outputs. Policy requirements must be supplied by the deployment, not inferred from a label. Kafka identifiers and audit metadata require their own retention policy. Key destruction addresses encrypted payload access, not every representation or retained link.
 
-Erasure should not manufacture a clinical status or previously absent resource. FHIR's masked absence reason [11] is an option where permitted, not a universal redaction recipe. Element constraints, disclosure policy and consumer expectations still apply. Even an erasure marker may be inappropriate where revealing a record's existence is prohibited.
-
-This analysis complements SECURE-CDS [12] by examining information availability rather than user competencies. No training, AI or clinical decisions were evaluated. Performance [5] and recovery-safe erasure remain separate.
-
-Limitations include one author-associated prototype, one role, small fixtures, two deterministic faults, development-mode Vault and a single broker. Three deployments repeat the experiment without independent replication or failure-rate estimates. Field checks cannot establish complete redaction. Kafka delivery, terminology, UK Core conformance, anonymity, clinical harm, WORM certification and legal compliance were not assessed. Structural acceptance cannot establish clinical intent.
+Limitations are one prototype, one role, small fixtures and source-informed deterministic faults. Repetitions demonstrate repeatability, not robustness or independent replication. Demographic checks cover selected API fields and retained FHIR outputs; S6 SQL was not re-queried after GET. Development-mode Vault, one broker, unconsumed Kafka topics and excluded WAL/historical backups bound storage claims. Validation excludes terminology and UK Core conformance. No clinical-user study, patient-harm assessment or legal-compliance determination was performed.
 
 ## Conclusions
 
-Comparing claims with observations exposed retention metadata without an explicit override gate, residual cache plaintext despite an eviction receipt, and divergent SQL and API states after external key destruction. External FHIR validation and semantic inspection exposed additional export limitations. The reusable outcome is a bounded evaluation protocol: policy decisions, storage effects, disclosure and clinical representation need separate evidence. Its clinical usefulness and applicability across EHR implementations remain to be evaluated.
+A claim-to-observation protocol exposed unsupported clinical resources and status transitions after erasure, a cache-eviction claim contradicted by readable data, and metadata inconsistent with prior key destruction. Paired analysis isolated erasure effects from baseline export defects. Verifiable erasure workflows require distinct evidence for policy, storage effects, completion status, disclosure and clinical meaning.
 
 ## References
 
-[1] European Parliament, Council of the European Union. Regulation (EU) 2016/679. Off J Eur Union. 2016;L119:1-88. Article 17.
+[1] Chandramouli R, Hibbard E. Guidelines for Media Sanitization. NIST SP 800-88 Rev. 2. September 2025. doi:10.6028/NIST.SP.800-88r2.
 
-[2] Chandramouli R, Hibbard E. Guidelines for Media Sanitization. NIST SP 800-88 Rev. 2. 2025. doi:10.6028/NIST.SP.800-88r2.
+[2] Reardon J, Basin D, Capkun S. SoK: Secure Data Deletion. In: IEEE Symposium on Security and Privacy. 2013. p. 301-315. doi:10.1109/SP.2013.28.
 
-[3] Geambasu R, Kohno T, Levy AA, Levy HM. Vanish: Increasing Data Privacy with Self-Destructing Data. In: 18th USENIX Security Symposium. USENIX Association; 2009.
+[3] Politou E, Alepis E, Patsakis C. Forgetting personal data and revoking consent under the GDPR: Challenges and proposed solutions. J Cybersecur. 2018;4(1):tyy001. doi:10.1093/cybsec/tyy001.
 
-[4] Hevesi R. Beyond Physical Deletion: Enforcing Verifiable Cryptographic Erasure Across Distributed Storage Layers in Zero-Plaintext Electronic Health Record Architectures [master's dissertation]. Politehnica University Timisoara; 2026.
+[4] European Parliament, Council of the European Union. Regulation (EU) 2016/679. Off J Eur Union. 2016;L119:1-88. Article 17.
 
-[5] Hevesi R, Iovanovici A. Performance Evaluation of an Envelope-Encrypted Electronic Health Record Architecture with Managed Keys and Blind Indexing. RoEduNet 2026. Accepted manuscript; 2026.
+[5] OWASP Foundation. Logging Cheat Sheet. https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html. Accessed 15 October 2026.
 
-[6] Hevesi R, Iovanovici A. CryptoShred Health MIE 2027 evaluation code and evidence. 2026. https://github.com/iovanalex/cryptoshred-health/tree/paper/mie2027-evaluation. Accessed 15 October 2026.
+[6] HL7 International. FHIR R4 Condition Definitions. 2019. https://hl7.org/fhir/R4/condition-definitions.html.
 
-[7] HAPI FHIR. Instance Validator. https://hapifhir.io/hapi-fhir/docs/validation/instance_validator.html. Accessed 15 October 2026.
+[7] HL7 International. FHIR R4 Security Labels. 2019. https://hl7.org/fhir/R4/security-labels.html.
 
-[8] HL7 International. FHIR R4 Condition Clinical Status Codes. 2019. https://hl7.org/fhir/R4/valueset-condition-clinical.html.
+[8] CryptoShred Health. MIE 2027 evaluation source and retained evidence. 2026. https://github.com/iovanalex/cryptoshred-health/tree/paper/mie2027-evaluation.
 
-[9] HL7 International. FHIR R4 Bundle. 2019. https://hl7.org/fhir/R4/bundle.html.
+[9] HAPI FHIR. Instance Validator. https://hapifhir.io/hapi-fhir/docs/validation/instance_validator.html. Accessed 15 October 2026.
 
-[10] HL7 International. FHIR R4 Base Resource Definitions. 2019. https://hl7.org/fhir/R4/resource.html.
+[10] HL7 International. FHIR R4 HL7 v3 Code System ObservationValue. 2019. https://hl7.org/fhir/R4/v3/ObservationValue/cs.html.
 
 [11] HL7 International. FHIR R4 DataAbsentReason. 2019. https://hl7.org/fhir/R4/codesystem-data-absent-reason.html.
-
-[12] Iovanovici A, Crisan-Vida M. Cyber-Resilient AI Literacy for Clinical Decision Support: A Competency Framework. EFMI STC 2026. Accepted manuscript; 2026.
