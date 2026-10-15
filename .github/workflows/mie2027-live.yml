@@ -68,15 +68,14 @@ jobs:
           EVIDENCE_COMMIT: ${{ github.sha }}
           EVIDENCE_RUN_ID: ${{ github.run_id }}
           EVIDENCE_RUN_ATTEMPT: ${{ github.run_attempt }}
+          EVIDENCE_LEVEL: live-services
         run: |
           cp /tmp/mie-backend.log experiments/mie2027/live-results/backend.log || true
           for service in redis vault kafka; do
             docker logs mie-$service > experiments/mie2027/live-results/$service.log 2>&1 || true
           done
+          docker inspect mie-redis mie-vault mie-kafka --format '{{.Name}} {{.Config.Image}} {{.Image}}' > experiments/mie2027/live-results/service-images.txt
           experiments/mie2027/write-provenance.sh experiments/mie2027/live-results
-          sed -i 's/evidence_level=component/evidence_level=live-services/' experiments/mie2027/live-results/provenance.txt
-          cd experiments/mie2027/live-results
-          find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS
       - uses: actions/upload-artifact@v4
         if: always()
         with:

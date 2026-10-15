@@ -133,6 +133,7 @@ def visit_erasure():
 def sql_failure():
     p = patient("SQLFAIL")
     pid = p["patientId"]
+    api("GET", f"/api/patients/{pid}")
     key = sql("SELECT k.vault_key_name FROM encryption_keys k JOIN patients p "
               "ON p.encryption_key_id=k.id WHERE p.patient_id='MIE-SQLFAIL'")
     assert vault_status("transit/keys/" + key) == 200
@@ -151,12 +152,15 @@ def sql_failure():
         state = sql("SELECT shredded, encrypted_data_blob IS NOT NULL FROM patients "
                     "WHERE patient_id='MIE-SQLFAIL'")
         key_status = vault_status("transit/keys/" + key)
+        response = api("GET", f"/api/patients/{pid}")
         save("sql-failure", {"request_error": error, "sql_state": state,
-                             "vault_key_http": key_status})
+                             "vault_key_http": key_status, "api_response": response})
         assert state == "f|t"
         assert key_status == 404
         return {"sql_rollback_retained_active_ciphertext": True,
-                "vault_key_already_destroyed": True, "request_http": 500}
+                "vault_key_already_destroyed": True, "request_http": 500,
+                "api_shredded_after_rollback": response.get("shredded"),
+                "api_retained_original_name": response.get("firstName") == "SyntheticSQLFAIL"}
     finally:
         sql("DROP TRIGGER mie_reject_update ON patients; DROP FUNCTION mie_reject_update()")
 

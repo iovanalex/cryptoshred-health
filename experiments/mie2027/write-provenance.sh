@@ -5,7 +5,7 @@ OUTPUT_DIR="${1:?usage: write-provenance.sh OUTPUT_DIRECTORY}"
 mkdir -p "${OUTPUT_DIR}"
 
 {
-  printf 'evidence_level=component\n'
+  printf 'evidence_level=%s\n' "${EVIDENCE_LEVEL:-component}"
   printf 'commit=%s\n' "${EVIDENCE_COMMIT:-$(git rev-parse HEAD)}"
   printf 'workflow_run_id=%s\n' "${EVIDENCE_RUN_ID:-local}"
   printf 'workflow_run_attempt=%s\n' "${EVIDENCE_RUN_ATTEMPT:-local}"
