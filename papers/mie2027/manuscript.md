@@ -1,6 +1,6 @@
 # Erasure Workflows and Residual Record State in a Distributed EHR
 
-Robert HEVESI and Alexandru IOVANOVICI
+Adina NITULESCU, Robert HEVESI, Mihaela CRISAN-VIDA and Alexandru IOVANOVICI
 
 Politehnica University Timisoara, Faculty of Automation and Computers, Timisoara, Romania
 
@@ -93,9 +93,9 @@ For an authorised operator, a partial-completion state should explain which acti
 
 Erasure should not manufacture a clinical status or previously absent resource. FHIR's masked absence reason [11] is an option where permitted, not a universal redaction recipe. Element constraints, disclosure policy and consumer expectations still apply. Even an erasure marker may be inappropriate where revealing a record's existence is prohibited.
 
-This system-facing analysis complements SECURE-CDS's user-facing cyber-resilience perspective [12]: source verification and escalation require faithful information about availability. No training intervention, AI model or clinical decision was evaluated. Performance [5] and recovery-safe erasure remain separate from the present contribution.
+This analysis complements SECURE-CDS [12] by examining information availability rather than user competencies. No training, AI or clinical decisions were evaluated. Performance [5] and recovery-safe erasure remain separate.
 
-The study is limited to one author-associated prototype, one role, small fixtures and two deterministic faults. Three fresh deployments repeat the same experiment; they do not constitute independent replication or estimate failure rates. Field-level checks do not establish complete redaction. Vault development mode and a single broker limit production generalisation. Kafka delivery was not independently asserted. Validator settings exclude terminology and UK Core conformance, while structural acceptance cannot establish clinical intent. We did not assess anonymity, clinical harm, WORM certification or legal compliance.
+Limitations include one author-associated prototype, one role, small fixtures, two deterministic faults, development-mode Vault and a single broker. Three deployments repeat the experiment without independent replication or failure-rate estimates. Field checks cannot establish complete redaction. Kafka delivery, terminology, UK Core conformance, anonymity, clinical harm, WORM certification and legal compliance were not assessed. Structural acceptance cannot establish clinical intent.
 
 ## Conclusions
 

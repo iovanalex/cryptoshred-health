@@ -131,7 +131,7 @@ def build(source, template, output):
             document.add_paragraph(block, "NoindentNormal" if first_body else "Normal")
             first_body = False
     document.core_properties.title = blocks[0][2:]
-    document.core_properties.author = "Robert Hevesi; Alexandru Iovanovici"
+    document.core_properties.author = "Adina Nitulescu; Robert Hevesi; Mihaela Crisan-Vida; Alexandru Iovanovici"
     document.core_properties.subject = "Scenario-based EHR erasure evaluation for MIE 2027"
     output.parent.mkdir(parents=True, exist_ok=True)
     document.save(output)
