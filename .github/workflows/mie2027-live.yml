@@ -8,6 +8,10 @@ permissions:
   contents: read
 jobs:
   live:
+    strategy:
+      fail-fast: false
+      matrix:
+        repetition: [1, 2, 3]
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     services:
@@ -62,6 +66,11 @@ jobs:
         env:
           MIE_POSTGRES_CONTAINER: ${{ job.services.postgres.id }}
         run: python3 experiments/mie2027/live-scenarios.py
+      - name: Independently validate live FHIR R4 exports
+        working-directory: backend
+        run: >-
+          ./mvnw -B -ntp -Dtest=LiveFhirR4ValidationTest
+          -Dmie.live.fhir=${{ github.workspace }}/experiments/mie2027/live-results test
       - name: Collect provenance and service logs
         if: always()
         env:
@@ -69,6 +78,7 @@ jobs:
           EVIDENCE_RUN_ID: ${{ github.run_id }}
           EVIDENCE_RUN_ATTEMPT: ${{ github.run_attempt }}
           EVIDENCE_LEVEL: live-services
+          EVIDENCE_REPETITION: ${{ matrix.repetition }}
         run: |
           cp /tmp/mie-backend.log experiments/mie2027/live-results/backend.log || true
           for service in redis vault kafka; do
@@ -79,6 +89,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: mie2027-live-${{ github.run_id }}
+          name: mie2027-live-${{ github.run_id }}-${{ matrix.repetition }}
           path: experiments/mie2027/live-results/
           retention-days: 90
