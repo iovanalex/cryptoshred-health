@@ -1,0 +1,213 @@
+{
+  "validator" : "HAPI FHIR 8.8.2",
+  "fhir_version" : "4.0.1",
+  "scope" : "base R4 structure and invariants; terminology checks disabled; UK Core packages not loaded",
+  "reports" : [ {
+    "file" : "patient-fhir-after.json",
+    "sha256" : "ea7d08ea6864becfd2a1e0c9338ddd4054d94b00ef278388e3d77303d25ed4c1",
+    "successful" : false,
+    "issues" : [ {
+      "location" : "Bundle.entry[0].resource/*Patient/MIE-PATIENT*/.meta.lastUpdated",
+      "message" : "Not a valid instant format: '2026-10-15T02:40:24.058280'",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0].resource/*Patient/MIE-PATIENT*/.identifier[0].system",
+      "message" : "OIDs must be valid (cryptoshred-health:patient-id)",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0].resource/*Patient/MIE-PATIENT*/",
+      "message" : "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[0].resource/*Patient/MIE-PATIENT*/.meta.profile[1]",
+      "message" : "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Patient' has not been checked because it could not be found",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle",
+      "message" : "Constraint failed: bdl-1: 'total only when a search or history'",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0]",
+      "message" : "The fullUrl must be an absolute URL (not 'Patient/MIE-PATIENT')",
+      "severity" : "ERROR"
+    } ]
+  }, {
+    "file" : "visit-fhir-after.json",
+    "sha256" : "d98d15da2dff206e9a5b92b31e4814e2f3117ceab231bb4149d591104761827f",
+    "successful" : false,
+    "issues" : [ {
+      "location" : "Bundle.entry[0].resource/*Patient/MIE-VISIT*/.meta.lastUpdated",
+      "message" : "Not a valid instant format: '2026-10-15T02:40:24.195744'",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0].resource/*Patient/MIE-VISIT*/.identifier[0].system",
+      "message" : "OIDs must be valid (cryptoshred-health:patient-id)",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0].resource/*Patient/MIE-VISIT*/",
+      "message" : "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[0].resource/*Patient/MIE-VISIT*/.meta.profile[1]",
+      "message" : "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Patient' has not been checked because it could not be found",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[1].resource/*Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.subject",
+      "message" : "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1",
+      "severity" : "INFORMATION"
+    }, {
+      "location" : "Bundle.entry[1].resource/*Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.period.start",
+      "message" : "If a date has a time, it must have a timezone",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[1].resource/*Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab*/",
+      "message" : "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[1].resource/*Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.meta.profile[0]",
+      "message" : "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Encounter' has not been checked because it could not be found",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[2].resource/*Condition/condition-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.subject",
+      "message" : "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1",
+      "severity" : "INFORMATION"
+    }, {
+      "location" : "Bundle.entry[2].resource/*Condition/condition-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.encounter",
+      "message" : "Details for Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1",
+      "severity" : "INFORMATION"
+    }, {
+      "location" : "Bundle.entry[2].resource/*Condition/condition-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/",
+      "message" : "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[2].resource/*Condition/condition-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.meta.profile[0]",
+      "message" : "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Condition' has not been checked because it could not be found",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[3].resource/*AllergyIntolerance/allergy-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.patient",
+      "message" : "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1",
+      "severity" : "INFORMATION"
+    }, {
+      "location" : "Bundle.entry[3].resource/*AllergyIntolerance/allergy-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.encounter",
+      "message" : "Details for Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1",
+      "severity" : "INFORMATION"
+    }, {
+      "location" : "Bundle.entry[3].resource/*AllergyIntolerance/allergy-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/",
+      "message" : "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[3].resource/*AllergyIntolerance/allergy-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.meta.profile[0]",
+      "message" : "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-AllergyIntolerance' has not been checked because it could not be found",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[4].resource/*MedicationStatement/med-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.subject",
+      "message" : "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1",
+      "severity" : "INFORMATION"
+    }, {
+      "location" : "Bundle.entry[4].resource/*MedicationStatement/med-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.context",
+      "message" : "Details for Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1",
+      "severity" : "INFORMATION"
+    }, {
+      "location" : "Bundle.entry[4].resource/*MedicationStatement/med-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/",
+      "message" : "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[4].resource/*MedicationStatement/med-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.meta.profile[0]",
+      "message" : "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-MedicationStatement' has not been checked because it could not be found",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle",
+      "message" : "Constraint failed: bdl-1: 'total only when a search or history'",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0]",
+      "message" : "The fullUrl must be an absolute URL (not 'Patient/MIE-VISIT')",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0]",
+      "message" : "The fullUrl must be an absolute URL (not 'Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab')",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0]",
+      "message" : "The fullUrl must be an absolute URL (not 'Condition/condition-06014ab8-dc1b-4a09-bb2c-7f1305043cab')",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0]",
+      "message" : "The fullUrl must be an absolute URL (not 'AllergyIntolerance/allergy-06014ab8-dc1b-4a09-bb2c-7f1305043cab')",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0]",
+      "message" : "The fullUrl must be an absolute URL (not 'MedicationStatement/med-06014ab8-dc1b-4a09-bb2c-7f1305043cab')",
+      "severity" : "ERROR"
+    } ]
+  }, {
+    "file" : "visit-fhir-before.json",
+    "sha256" : "86261a91c3f537882e34d9f0a8a50ed17dea1769a7902789f3156eb615e8976a",
+    "successful" : false,
+    "issues" : [ {
+      "location" : "Bundle.entry[0].resource/*Patient/MIE-VISIT*/.meta.lastUpdated",
+      "message" : "Not a valid instant format: '2026-10-15T02:40:24.195744'",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0].resource/*Patient/MIE-VISIT*/.identifier[0].system",
+      "message" : "OIDs must be valid (cryptoshred-health:patient-id)",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0].resource/*Patient/MIE-VISIT*/",
+      "message" : "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[0].resource/*Patient/MIE-VISIT*/.meta.profile[1]",
+      "message" : "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Patient' has not been checked because it could not be found",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[1].resource/*Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.subject",
+      "message" : "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1",
+      "severity" : "INFORMATION"
+    }, {
+      "location" : "Bundle.entry[1].resource/*Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.period.start",
+      "message" : "If a date has a time, it must have a timezone",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[1].resource/*Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab*/",
+      "message" : "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[1].resource/*Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.meta.profile[0]",
+      "message" : "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Encounter' has not been checked because it could not be found",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[2].resource/*Condition/condition-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.subject",
+      "message" : "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1",
+      "severity" : "INFORMATION"
+    }, {
+      "location" : "Bundle.entry[2].resource/*Condition/condition-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.encounter",
+      "message" : "Details for Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1",
+      "severity" : "INFORMATION"
+    }, {
+      "location" : "Bundle.entry[2].resource/*Condition/condition-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/",
+      "message" : "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle.entry[2].resource/*Condition/condition-06014ab8-dc1b-4a09-bb2c-7f1305043cab*/.meta.profile[0]",
+      "message" : "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Condition' has not been checked because it could not be found",
+      "severity" : "WARNING"
+    }, {
+      "location" : "Bundle",
+      "message" : "Constraint failed: bdl-1: 'total only when a search or history'",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0]",
+      "message" : "The fullUrl must be an absolute URL (not 'Patient/MIE-VISIT')",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0]",
+      "message" : "The fullUrl must be an absolute URL (not 'Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab')",
+      "severity" : "ERROR"
+    }, {
+      "location" : "Bundle.entry[0]",
+      "message" : "The fullUrl must be an absolute URL (not 'Condition/condition-06014ab8-dc1b-4a09-bb2c-7f1305043cab')",
+      "severity" : "ERROR"
+    } ]
+  } ]
+}

@@ -1,0 +1,3 @@
+/mie-redis redis:7-alpine sha256:f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058
+/mie-vault hashicorp/vault:1.13.3 sha256:9e622613a2d513f092ae49a2b5d182382f817d125f5cbe97069f045d16fb8a95
+/mie-kafka apache/kafka:3.7.0 sha256:fe7e6a65afa5de2930f54c3d31d517d50acf8ff20f29a6f506df021a901d754d

@@ -1,0 +1,1038 @@
+{
+  "resourceType": "OperationOutcome",
+  "issue": [ {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 23
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 54
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Type_Specific_Checks_DT_DateTime_Regex"
+    } ],
+    "severity": "error",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Type_Specific_Checks_DT_DateTime_Regex"
+      } ]
+    },
+    "diagnostics": "Not a valid instant format: '2026-10-15T02:40:23.495940'",
+    "location": [ "Bundle.entry[0].resource/*Patient/MIE-VISIT*/.meta.lastUpdated", "Line[23] Col[54]" ],
+    "expression": [ "Bundle.entry[0].resource/*Patient/MIE-VISIT*/.meta.lastUpdated" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 27
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 62
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Type_Specific_Checks_DT_OID_Valid"
+    } ],
+    "severity": "error",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Type_Specific_Checks_DT_OID_Valid"
+      } ]
+    },
+    "diagnostics": "OIDs must be valid (cryptoshred-health:patient-id)",
+    "location": [ "Bundle.entry[0].resource/*Patient/MIE-VISIT*/.identifier[0].system", "Line[27] Col[62]" ],
+    "expression": [ "Bundle.entry[0].resource/*Patient/MIE-VISIT*/.identifier[0].system" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 15
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 8
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "http://hl7.org/fhir/StructureDefinition/DomainResource#dom-6"
+    } ],
+    "severity": "warning",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "http://hl7.org/fhir/StructureDefinition/DomainResource#dom-6"
+      } ]
+    },
+    "diagnostics": "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+    "location": [ "Bundle.entry[0].resource/*Patient/MIE-VISIT*/", "Line[15] Col[8]" ],
+    "expression": [ "Bundle.entry[0].resource/*Patient/MIE-VISIT*/" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 15
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 8
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Validation_VAL_Profile_Unknown"
+    } ],
+    "severity": "warning",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Validation_VAL_Profile_Unknown"
+      } ]
+    },
+    "diagnostics": "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Patient' has not been checked because it could not be found",
+    "location": [ "Bundle.entry[0].resource/*Patient/MIE-VISIT*/.meta.profile[1]", "Line[15] Col[8]" ],
+    "expression": [ "Bundle.entry[0].resource/*Patient/MIE-VISIT*/.meta.profile[1]" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 69
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - Not a valid instant format: '2026-10-15T02:40:23.495940'",
+    "location": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject", "Line[69] Col[10]" ],
+    "expression": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 69
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - OIDs must be valid (cryptoshred-health:patient-id)",
+    "location": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject", "Line[69] Col[10]" ],
+    "expression": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 69
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+    "location": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject", "Line[69] Col[10]" ],
+    "expression": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 69
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Patient' has not been checked because it could not be found",
+    "location": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject", "Line[69] Col[10]" ],
+    "expression": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 74
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 48
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Type_Specific_Checks_DT_DateTime_TZ"
+    } ],
+    "severity": "error",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Type_Specific_Checks_DT_DateTime_TZ"
+      } ]
+    },
+    "diagnostics": "If a date has a time, it must have a timezone",
+    "location": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/.period.start", "Line[74] Col[48]" ],
+    "expression": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/.period.start" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 48
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 8
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "http://hl7.org/fhir/StructureDefinition/DomainResource#dom-6"
+    } ],
+    "severity": "warning",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "http://hl7.org/fhir/StructureDefinition/DomainResource#dom-6"
+      } ]
+    },
+    "diagnostics": "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+    "location": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/", "Line[48] Col[8]" ],
+    "expression": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 48
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 8
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Validation_VAL_Profile_Unknown"
+    } ],
+    "severity": "warning",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Validation_VAL_Profile_Unknown"
+      } ]
+    },
+    "diagnostics": "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Encounter' has not been checked because it could not be found",
+    "location": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/.meta.profile[0]", "Line[48] Col[8]" ],
+    "expression": [ "Bundle.entry[1].resource/*Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff*/.meta.profile[0]" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 118
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - Not a valid instant format: '2026-10-15T02:40:23.495940'",
+    "location": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject", "Line[118] Col[10]" ],
+    "expression": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 118
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - OIDs must be valid (cryptoshred-health:patient-id)",
+    "location": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject", "Line[118] Col[10]" ],
+    "expression": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 118
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+    "location": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject", "Line[118] Col[10]" ],
+    "expression": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 118
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Patient' has not been checked because it could not be found",
+    "location": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject", "Line[118] Col[10]" ],
+    "expression": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 121
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1 - Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1",
+    "location": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter", "Line[121] Col[10]" ],
+    "expression": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 121
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1 - If a date has a time, it must have a timezone",
+    "location": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter", "Line[121] Col[10]" ],
+    "expression": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 121
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1 - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+    "location": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter", "Line[121] Col[10]" ],
+    "expression": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 121
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1 - Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Encounter' has not been checked because it could not be found",
+    "location": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter", "Line[121] Col[10]" ],
+    "expression": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 95
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 8
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "http://hl7.org/fhir/StructureDefinition/DomainResource#dom-6"
+    } ],
+    "severity": "warning",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "http://hl7.org/fhir/StructureDefinition/DomainResource#dom-6"
+      } ]
+    },
+    "diagnostics": "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+    "location": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/", "Line[95] Col[8]" ],
+    "expression": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 95
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 8
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Validation_VAL_Profile_Unknown"
+    } ],
+    "severity": "warning",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Validation_VAL_Profile_Unknown"
+      } ]
+    },
+    "diagnostics": "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Condition' has not been checked because it could not be found",
+    "location": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.meta.profile[0]", "Line[95] Col[8]" ],
+    "expression": [ "Bundle.entry[2].resource/*Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.meta.profile[0]" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 167
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - Not a valid instant format: '2026-10-15T02:40:23.495940'",
+    "location": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.patient", "Line[167] Col[10]" ],
+    "expression": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.patient" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 167
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - OIDs must be valid (cryptoshred-health:patient-id)",
+    "location": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.patient", "Line[167] Col[10]" ],
+    "expression": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.patient" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 167
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+    "location": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.patient", "Line[167] Col[10]" ],
+    "expression": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.patient" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 167
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Patient' has not been checked because it could not be found",
+    "location": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.patient", "Line[167] Col[10]" ],
+    "expression": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.patient" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 170
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1 - Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1",
+    "location": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter", "Line[170] Col[10]" ],
+    "expression": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 170
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1 - If a date has a time, it must have a timezone",
+    "location": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter", "Line[170] Col[10]" ],
+    "expression": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 170
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1 - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+    "location": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter", "Line[170] Col[10]" ],
+    "expression": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 170
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1 - Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Encounter' has not been checked because it could not be found",
+    "location": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter", "Line[170] Col[10]" ],
+    "expression": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.encounter" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 136
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 8
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "http://hl7.org/fhir/StructureDefinition/DomainResource#dom-6"
+    } ],
+    "severity": "warning",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "http://hl7.org/fhir/StructureDefinition/DomainResource#dom-6"
+      } ]
+    },
+    "diagnostics": "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+    "location": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/", "Line[136] Col[8]" ],
+    "expression": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 136
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 8
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Validation_VAL_Profile_Unknown"
+    } ],
+    "severity": "warning",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Validation_VAL_Profile_Unknown"
+      } ]
+    },
+    "diagnostics": "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-AllergyIntolerance' has not been checked because it could not be found",
+    "location": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.meta.profile[0]", "Line[136] Col[8]" ],
+    "expression": [ "Bundle.entry[3].resource/*AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.meta.profile[0]" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 196
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - Not a valid instant format: '2026-10-15T02:40:23.495940'",
+    "location": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject", "Line[196] Col[10]" ],
+    "expression": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 196
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - OIDs must be valid (cryptoshred-health:patient-id)",
+    "location": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject", "Line[196] Col[10]" ],
+    "expression": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 196
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+    "location": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject", "Line[196] Col[10]" ],
+    "expression": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 196
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1 - Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Patient' has not been checked because it could not be found",
+    "location": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject", "Line[196] Col[10]" ],
+    "expression": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.subject" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 199
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1 - Details for Patient/MIE-VISIT matching against profile http://hl7.org/fhir/StructureDefinition/Patient|4.0.1",
+    "location": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.context", "Line[199] Col[10]" ],
+    "expression": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.context" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 199
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1 - If a date has a time, it must have a timezone",
+    "location": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.context", "Line[199] Col[10]" ],
+    "expression": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.context" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 199
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1 - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+    "location": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.context", "Line[199] Col[10]" ],
+    "expression": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.context" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 199
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 10
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Details_for__matching_against_Profile_"
+    } ],
+    "severity": "information",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Details_for__matching_against_Profile_"
+      } ]
+    },
+    "diagnostics": "Details for Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff matching against profile http://hl7.org/fhir/StructureDefinition/Encounter|4.0.1 - Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Encounter' has not been checked because it could not be found",
+    "location": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.context", "Line[199] Col[10]" ],
+    "expression": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.context" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 180
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 8
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "http://hl7.org/fhir/StructureDefinition/DomainResource#dom-6"
+    } ],
+    "severity": "warning",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "http://hl7.org/fhir/StructureDefinition/DomainResource#dom-6"
+      } ]
+    },
+    "diagnostics": "Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)",
+    "location": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/", "Line[180] Col[8]" ],
+    "expression": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 180
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 8
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "Validation_VAL_Profile_Unknown"
+    } ],
+    "severity": "warning",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "Validation_VAL_Profile_Unknown"
+      } ]
+    },
+    "diagnostics": "Profile reference 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-MedicationStatement' has not been checked because it could not be found",
+    "location": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.meta.profile[0]", "Line[180] Col[8]" ],
+    "expression": [ "Bundle.entry[4].resource/*MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff*/.meta.profile[0]" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 1
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 2
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "http://hl7.org/fhir/StructureDefinition/Bundle#bdl-1"
+    } ],
+    "severity": "error",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "http://hl7.org/fhir/StructureDefinition/Bundle#bdl-1"
+      } ]
+    },
+    "diagnostics": "Constraint failed: bdl-1: 'total only when a search or history'",
+    "location": [ "Bundle", "Line[1] Col[2]" ],
+    "expression": [ "Bundle" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 13
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 6
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "BUNDLE_ENTRY_URL_ABSOLUTE"
+    } ],
+    "severity": "error",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "BUNDLE_ENTRY_URL_ABSOLUTE"
+      } ]
+    },
+    "diagnostics": "The fullUrl must be an absolute URL (not 'Patient/MIE-VISIT')",
+    "location": [ "Bundle.entry[0]", "Line[13] Col[6]" ],
+    "expression": [ "Bundle.entry[0]" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 46
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 6
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "BUNDLE_ENTRY_URL_ABSOLUTE"
+    } ],
+    "severity": "error",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "BUNDLE_ENTRY_URL_ABSOLUTE"
+      } ]
+    },
+    "diagnostics": "The fullUrl must be an absolute URL (not 'Encounter/4a4f2571-3c61-4436-b055-cb58ca1107ff')",
+    "location": [ "Bundle.entry[0]", "Line[46] Col[6]" ],
+    "expression": [ "Bundle.entry[0]" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 93
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 6
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "BUNDLE_ENTRY_URL_ABSOLUTE"
+    } ],
+    "severity": "error",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "BUNDLE_ENTRY_URL_ABSOLUTE"
+      } ]
+    },
+    "diagnostics": "The fullUrl must be an absolute URL (not 'Condition/condition-4a4f2571-3c61-4436-b055-cb58ca1107ff')",
+    "location": [ "Bundle.entry[0]", "Line[93] Col[6]" ],
+    "expression": [ "Bundle.entry[0]" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 134
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 6
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "BUNDLE_ENTRY_URL_ABSOLUTE"
+    } ],
+    "severity": "error",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "BUNDLE_ENTRY_URL_ABSOLUTE"
+      } ]
+    },
+    "diagnostics": "The fullUrl must be an absolute URL (not 'AllergyIntolerance/allergy-4a4f2571-3c61-4436-b055-cb58ca1107ff')",
+    "location": [ "Bundle.entry[0]", "Line[134] Col[6]" ],
+    "expression": [ "Bundle.entry[0]" ]
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-line",
+      "valueInteger": 178
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-issue-col",
+      "valueInteger": 6
+    }, {
+      "url": "http://hl7.org/fhir/StructureDefinition/operationoutcome-message-id",
+      "valueString": "BUNDLE_ENTRY_URL_ABSOLUTE"
+    } ],
+    "severity": "error",
+    "code": "processing",
+    "details": {
+      "coding": [ {
+        "system": "http://hl7.org/fhir/java-core-messageId",
+        "code": "BUNDLE_ENTRY_URL_ABSOLUTE"
+      } ]
+    },
+    "diagnostics": "The fullUrl must be an absolute URL (not 'MedicationStatement/med-4a4f2571-3c61-4436-b055-cb58ca1107ff')",
+    "location": [ "Bundle.entry[0]", "Line[178] Col[6]" ],
+    "expression": [ "Bundle.entry[0]" ]
+  } ]
+}

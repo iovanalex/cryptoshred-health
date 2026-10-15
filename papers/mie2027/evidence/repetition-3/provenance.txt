@@ -1,0 +1,7 @@
+evidence_level=live-services
+commit=436d4d662315e82de62df07776c449f02d26bae3
+workflow_run_id=38672097976
+workflow_run_attempt=1
+repetition=3
+generated_utc=2026-10-15T02:40:36Z
+java_version=openjdk version "21.0.12.1" 2026-08-18 LTS

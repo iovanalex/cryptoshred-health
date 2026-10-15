@@ -1,0 +1,61 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-f7ae15b0-73cc-48b6-b717-636c0bda3986",
+  "type": "collection",
+  "timestamp": "2026-10-15T02:40:23.434169728Z",
+  "meta": {
+    "lastUpdated": "2026-10-15T02:40:23.434238862Z",
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+        "code": "REDACTED",
+        "display": "Crypto-Shredded under GDPR Art. 17"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "Patient/MIE-PATIENT",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "MIE-PATIENT",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient",
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Patient"
+          ],
+          "lastUpdated": "2026-10-15T02:40:23.386625",
+          "tag": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+              "code": "REDACTED",
+              "display": "Crypto-Shredded under GDPR Art. 17"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:cryptoshred-health:patient-id",
+            "use": "secondary",
+            "value": "MIE-PATIENT"
+          }
+        ],
+        "active": false,
+        "name": [
+          {
+            "use": "official",
+            "family": "[SHREDDED]",
+            "given": [
+              "[SHREDDED]"
+            ]
+          }
+        ],
+        "gender": "unknown"
+      }
+    }
+  ],
+  "total": 1
+}

@@ -1,0 +1,110 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-3c6afdb2-fb66-41c5-bb05-1c27edf5d1e5",
+  "type": "collection",
+  "timestamp": "2026-10-15T02:40:19.592571005Z",
+  "meta": {
+    "lastUpdated": "2026-10-15T02:40:19.592593387Z",
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "Patient/MIE-VISIT",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "MIE-VISIT",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient",
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Patient"
+          ],
+          "lastUpdated": "2026-10-15T02:40:19.462866"
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:cryptoshred-health:patient-id",
+            "value": "MIE-VISIT",
+            "use": "secondary"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Evaluation",
+            "given": [
+              "SyntheticVISIT"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1980-01-01"
+      }
+    },
+    {
+      "fullUrl": "Encounter/c0c325d4-0d49-4574-9b50-e4f029e13827",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "c0c325d4-0d49-4574-9b50-e4f029e13827",
+        "meta": {
+          "profile": [
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Encounter"
+          ]
+        },
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "display": "ambulatory",
+          "code": "AMB"
+        },
+        "subject": {
+          "display": "SyntheticVISIT Evaluation",
+          "reference": "Patient/MIE-VISIT"
+        },
+        "period": {
+          "start": "2026-10-15T02:40:19.511897"
+        },
+        "serviceProvider": {
+          "display": "General Practice"
+        }
+      }
+    },
+    {
+      "fullUrl": "Condition/condition-c0c325d4-0d49-4574-9b50-e4f029e13827",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "condition-c0c325d4-0d49-4574-9b50-e4f029e13827",
+        "meta": {
+          "profile": [
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Condition"
+          ]
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "code": "active",
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/MIE-VISIT"
+        },
+        "encounter": {
+          "reference": "Encounter/c0c325d4-0d49-4574-9b50-e4f029e13827"
+        },
+        "code": {
+          "text": "Synthetic diagnosis"
+        },
+        "note": [
+          {
+            "text": "Synthetic visit notes"
+          }
+        ]
+      }
+    }
+  ],
+  "total": 3
+}

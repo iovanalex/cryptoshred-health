@@ -1,0 +1,209 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-91f4af8f-9241-445a-85bd-dbc5874b1988",
+  "type": "collection",
+  "timestamp": "2026-10-15T02:40:24.440618147Z",
+  "meta": {
+    "lastUpdated": "2026-10-15T02:40:24.440641390Z",
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "Patient/MIE-VISIT",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "MIE-VISIT",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient",
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Patient"
+          ],
+          "lastUpdated": "2026-10-15T02:40:24.195744"
+        },
+        "identifier": [
+          {
+            "use": "secondary",
+            "system": "urn:oid:cryptoshred-health:patient-id",
+            "value": "MIE-VISIT"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Evaluation",
+            "given": [
+              "SyntheticVISIT"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1980-01-01"
+      }
+    },
+    {
+      "fullUrl": "Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "06014ab8-dc1b-4a09-bb2c-7f1305043cab",
+        "meta": {
+          "profile": [
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Encounter"
+          ],
+          "tag": [
+            {
+              "code": "REDACTED",
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+              "display": "Crypto-Shredded under GDPR Art. 17"
+            }
+          ]
+        },
+        "status": "finished",
+        "class": {
+          "code": "AMB",
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "display": "ambulatory"
+        },
+        "subject": {
+          "display": "SyntheticVISIT Evaluation",
+          "reference": "Patient/MIE-VISIT"
+        },
+        "period": {
+          "start": "2026-10-15T02:40:24.245045"
+        },
+        "serviceProvider": {
+          "display": "[SHREDDED]"
+        },
+        "reasonCode": [
+          {
+            "text": "[SHREDDED]"
+          }
+        ],
+        "participant": [
+          {
+            "individual": {
+              "display": "[SHREDDED]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "Condition/condition-06014ab8-dc1b-4a09-bb2c-7f1305043cab",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "condition-06014ab8-dc1b-4a09-bb2c-7f1305043cab",
+        "meta": {
+          "profile": [
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Condition"
+          ],
+          "tag": [
+            {
+              "code": "REDACTED",
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+              "display": "Crypto-Shredded under GDPR Art. 17"
+            }
+          ]
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "inactive"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/MIE-VISIT"
+        },
+        "encounter": {
+          "reference": "Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab"
+        },
+        "code": {
+          "text": "[SHREDDED]"
+        },
+        "note": [
+          {
+            "text": "[SHREDDED]"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "AllergyIntolerance/allergy-06014ab8-dc1b-4a09-bb2c-7f1305043cab",
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "allergy-06014ab8-dc1b-4a09-bb2c-7f1305043cab",
+        "meta": {
+          "profile": [
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-AllergyIntolerance"
+          ],
+          "tag": [
+            {
+              "code": "REDACTED",
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+              "display": "Crypto-Shredded under GDPR Art. 17"
+            }
+          ]
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "inactive"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "patient": {
+          "reference": "Patient/MIE-VISIT"
+        },
+        "encounter": {
+          "reference": "Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab"
+        },
+        "code": {
+          "text": "[SHREDDED]"
+        }
+      }
+    },
+    {
+      "fullUrl": "MedicationStatement/med-06014ab8-dc1b-4a09-bb2c-7f1305043cab",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "id": "med-06014ab8-dc1b-4a09-bb2c-7f1305043cab",
+        "meta": {
+          "profile": [
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-MedicationStatement"
+          ],
+          "tag": [
+            {
+              "code": "REDACTED",
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue",
+              "display": "Crypto-Shredded under GDPR Art. 17"
+            }
+          ]
+        },
+        "status": "unknown",
+        "subject": {
+          "reference": "Patient/MIE-VISIT"
+        },
+        "context": {
+          "reference": "Encounter/06014ab8-dc1b-4a09-bb2c-7f1305043cab"
+        },
+        "medicationCodeableConcept": {
+          "text": "[SHREDDED]"
+        }
+      }
+    }
+  ],
+  "total": 5
+}

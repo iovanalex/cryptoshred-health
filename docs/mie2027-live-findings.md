@@ -52,10 +52,14 @@ consumer delivery are not independently asserted by this suite.
 ## FHIR evidence boundaries
 
 The separate component suite passes 20 existing tests and parses its active
-and shredded fixtures with the strict HAPI R4 parser. The live workflow saves
-additional FHIR Bundles. The live Bundles are not yet independently checked
-against UK Core profiles or a full FHIR instance validator. No claim of full
-profile conformance follows from these results.
+and shredded fixtures with the strict HAPI R4 parser. A subsequent evaluation at
+commit `436d4d662315e82de62df07776c449f02d26bae3` independently assessed live
+exports using the HAPI FHIR 8.8.2 instance validator across three deployments.
+All nine exports produced base R4 structure/invariant errors: 4 per patient-after
+Bundle, 7 per visit-before Bundle and 9 per visit-after Bundle. Terminology checks
+were disabled and UK Core packages were not loaded. Retained evidence and the
+empirical manuscript are under `papers/mie2027`.
+Run: https://github.com/iovanalex/cryptoshred-health/actions/runs/38672097976
 
 ## Manuscript implications
 
