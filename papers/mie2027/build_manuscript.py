@@ -71,6 +71,8 @@ def build(source, template, output):
         elif block.startswith("### "):
             document.add_paragraph(block[4:], "Heading 2")
             first_body = True
+        elif block.startswith("Table note."):
+            document.add_paragraph(block, "CaptionLong")
         elif re.match(r"Table \d+\.", block):
             p = document.add_paragraph(block, "CaptionLong")
             p.paragraph_format.keep_with_next = True

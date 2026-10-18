@@ -111,3 +111,39 @@ Alexandru Iovanovici, in that order.
 - https://hl7.org/fhir/R4/security-labels.html
 - https://hl7.org/fhir/R4/v3/ObservationValue/cs.html
 - https://hl7.org/fhir/R4/codesystem-data-absent-reason.html
+
+## Follow-up review addressed 18 October 2026
+
+- D criteria are now explicitly attributed to the pre-existing service contract;
+  only P criteria are proposed here. S4 contradicts a prior eviction commitment.
+  Post-hoc S2 export checks are explicitly identified as additional observations,
+  not pre-specified tests.
+- Removed “external” from the S6 key-destruction result.
+- Results now connects S4 to caught/logged eviction exceptions and an eviction
+  claim unconditioned on the DEL result. Receipt construction before SQL commit
+  and after asynchronous event submission is stated there.
+- Results separately reports the canonical signature fields and exclusion of
+  layerStatus. This source-based finding does not imply a signature-forgery
+  experiment or proof-strength evaluation.
+- Kafka metadata findings have a separate paragraph.
+- Abstract explicitly identifies one prototype using synthetic data. CI jobs are
+  named; the opening clinical motivation is written in connected prose.
+- Table 1 has an explanatory note for D/F/P and distinguishes S2 Patient export
+  from S3 paired visit exports.
+- Added two verified clinical-informatics papers: Lee et al., Applied Clinical
+  Informatics 2025, doi:10.1055/a-2466-4371 (FHIR consent-based segmentation);
+  Malin and Airoldi, Studies in Health Technology and Informatics 2007;129(Pt 1):
+  320-324 (sensitive information exposed when linking medical-record access
+  logs). The latter supports confidentiality risks in audit linkage, not an
+  assertion that every application log contains plaintext clinical payloads.
+  The original OWASP guidance is retained alongside the peer-reviewed evidence.
+- References were renumbered in first-citation order, now 13 entries.
+- Rechecked public MIE author instructions and submission landing page on
+  18 October: neither states an anonymisation rule. The authenticated form was
+  not inspected; absence of a public rule is not confirmation of no blinding.
+- Wording was shortened around repeated table explanations to maintain five
+  pages with bibliography margin, without shrinking fonts or margins.
+
+Additional sources verified:
+- https://asu.elsevierpure.com/en/publications/fhir-granular-sensitive-data-segmentation/
+- https://pubmed.ncbi.nlm.nih.gov/17911731/
